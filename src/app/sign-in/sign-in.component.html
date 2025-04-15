@@ -1,0 +1,54 @@
+<div class="form-container">
+  <form class="form" [formGroup]="form" (ngSubmit)="enviar()">
+    <h2>Sign up IMAGEHUB</h2>
+
+    <fieldset
+      [class]='(form.get("dni")?.errors?.["dni"] && form.value.dni !=="") ? "red":"none"'
+    >
+      <legend>DNI</legend>
+      <input type="text" formControlName="dni" />
+    </fieldset>
+
+    <fieldset
+      [class]='(form.get("email")?.errors?.["email"] && form.value.email !=="") ? "red":"none"'
+    >
+      <legend>Email</legend>
+      <input type="email" formControlName="email" />
+    </fieldset>
+
+    <fieldset
+      [class]='(form.get("username")?.errors?.["username"] && form.value.email !=="") ? "red":"none"'
+    >
+      <legend>Username</legend>
+      <input type="username" formControlName="username" />
+    </fieldset>
+
+    <fieldset
+      [class]='(form.get("pwd")?.errors?.["minlength"] && form.value.pwd !=="") ? "red":"none"'
+    >
+      <legend>Password</legend>
+      <input type="text" formControlName="pwd" />
+    </fieldset>
+
+    <fieldset
+      [class]='(form.get("pwd")?.errors?.["minlength"] && form.value.pwd !=="") ? "red":"none"'
+    >
+      <legend>Confirm password</legend>
+      <input type="text" formControlName="ConfirmPwd" />
+    </fieldset>
+    @if(form.value.ConfirmPwd !== form.value.pwd && form.value.pwd!== ""&&
+    form.value.ConfirmPwd!== ""){
+    <label class="red">The passwords do not match</label>
+    }
+    <div>
+      <button
+        class="form-button"
+        [disabled]="form.value.ConfirmPwd !== form.value.pwd || form.invalid"
+      >
+        Send
+      </button>
+      <input type="reset" value="Reset" class="form-button" />
+    </div>
+    <a href="">Do you already have an account ? Log in here</a>
+  </form>
+</div>

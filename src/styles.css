@@ -1,1 +1,121 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+  font-family: "Noto Sans",
+    sans-serif;
+}
+
+.form-container {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  background-image: url("./../public/background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #00000008;
+  background-blend-mode: color;
+}
+
+.form {
+  width: 40%;
+  background-color: #222;
+  border: medium solid #B9B8B5;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+}
+
+.form:hover {
+  transform: scale(1.01);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.form h2 {
+  color: #D4AF37;
+  text-align: center;
+}
+
+.form fieldset {
+  color: #B9B8B5;
+  width: 80%;
+  margin: 20px auto;
+  border-radius: 0.5rem;
+  border-color: #B9B8B5;
+  transition: color 0.5s ease, border 0.5s ease, ;
+}
+
+.form fieldset input {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  width: 100%;
+  color: #B9B8B5;
+}
+
+
+.form fieldset:has(input:focus) {
+  border-color: #D4AF37;
+  color: #D4AF37;
+  transition: color 0.5s ease, border 0.5s ease, ;
+}
+
+
+
+.form div {
+  margin: 40px auto;
+  display: flex;
+  width: 60%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form .form-button {
+  background-color: #D3C289;
+  color: #222;
+  outline: none;
+  border: none;
+  border-radius: 0.5rem;
+  width: 40%;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  transition: color 0.5s ease, background 0.5s ease, transform 0.5s ease;
+
+}
+
+.form .form-button:hover {
+  background-color: #D4AF37;
+  cursor: pointer;
+  transform: scale(1.01);
+}
+
+.form button:disabled {
+  background-color: #f2e4b6;
+}
+
+.form button:disabled:hover {
+  background-color: #f2e4b6;
+  cursor: default;
+  transform: scale(1.0);
+}
+
+.form a {
+  display: block;
+  margin: 30px auto 20px;
+  width: 80%;
+  text-emphasis: center;
+  color: #B9B8B5;
+  text-align: center;
+}
+
+.red {
+  color: #d32f2f !important;
+  border-color: #d32f2f !important;
+}
+
+.form label {
+  margin: -60px 30px 0px;
+  font-size: 0.7rem;
+}

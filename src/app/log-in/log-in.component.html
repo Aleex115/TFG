@@ -1,0 +1,23 @@
+<div class="form-container">
+  <form class="form" [formGroup]="form" (ngSubmit)="enviar()">
+    <h2>Log in IMAGEHUB</h2>
+    <fieldset
+      [class]='(form.get("email")?.errors?.["email"] && form.value.email !=="") ? "red":"noe"'
+    >
+      <legend>Email</legend>
+      <input type="email" formControlName="email" />
+    </fieldset>
+    <fieldset
+      [class]='(form.get("pwd")?.errors?.["minlength"] && form.value.pwd !=="") ? "red":"none"'
+    >
+      <legend>Password</legend>
+      <input type="password" formControlName="pwd" />
+    </fieldset>
+
+    <div>
+      <button class="form-button" [disabled]="form.invalid">Send</button>
+      <input type="reset" value="Reset" class="form-button" />
+    </div>
+    <a href="">You don't have an account already? Sign in here</a>
+  </form>
+</div>
