@@ -26,6 +26,12 @@ body {
   margin: 0;
 }
 
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 /**
  * Render the `main` element consistently in IE.
  */
@@ -42,6 +48,10 @@ main {
 h1 {
   font-size: 2em;
   margin: 0.67em 0;
+}
+
+h3 {
+  margin: 0;
 }
 
 /* Grouping content
@@ -81,7 +91,13 @@ pre {
  */
 
 a {
+  text-decoration: none;
+  color: none;
   background-color: transparent;
+}
+
+a:active {
+  color: red;
 }
 
 /**

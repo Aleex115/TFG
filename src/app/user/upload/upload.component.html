@@ -1,0 +1,35 @@
+<div class="form-container">
+  <div class="upload-form">
+    <img src="{{ previewUrl }}" alt="" />
+    <form
+      enctype="multipart/form-data"
+      [formGroup]="form"
+      (ngSubmit)="submit($event)"
+    >
+      <h2>Upload image</h2>
+      <fieldset>
+        <legend>Title</legend>
+        <input type="text" formControlName="title" name="title" />
+      </fieldset>
+      <fieldset>
+        <legend>Description</legend>
+        <input type="text" formControlName="descp" name="descp" />
+      </fieldset>
+
+      <div class="custom-file-upload">
+        <input
+          type="file"
+          id="img"
+          name="img"
+          (change)="onFileSelected($event)"
+          accept="image/*"
+        />
+      </div>
+
+      <div class="button-container">
+        <button class="form-button" [disabled]="form.invalid">Send</button>
+        <input type="reset" value="Reset" class="form-button" />
+      </div>
+    </form>
+  </div>
+</div>

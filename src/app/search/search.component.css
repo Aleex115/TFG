@@ -1,0 +1,136 @@
+.input-container {
+  margin: 20px auto;
+  width: 60%;
+  max-width: 550px;
+  padding: 0.5rem 1rem;
+  background-color: #333;
+  color: #e0e0e0;
+  border: 1px solid #444;
+  border-radius: 0.5rem;
+  outline: none;
+  font-size: 0.9rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.input-container label {
+  background-color: #333;
+  padding: 0.6rem;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  transition: transform 0.3s ease;
+}
+
+.input-container input {
+  font-size: 1.1rem;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #B9B8B5;
+  width: 100%;
+}
+
+.input-container input::placeholder {
+  color: #888;
+  font-style: italic;
+}
+
+.input-container label {
+  background-color: #B9B8B5;
+  color: #333;
+}
+
+.input-container label:hover {
+  color: #a18529;
+  cursor: pointer;
+}
+
+.input-container label i {
+  color: inherit;
+}
+
+.input-container::placeholder {
+  font-style: italic;
+}
+
+
+
+
+
+.user-container {
+  margin: 0 auto;
+  width: 80%;
+  max-width: 800px;
+  overflow-y: auto;
+  max-height: 58%;
+  margin-top: 20px;
+}
+
+.user {
+  position: relative;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  background-color: #fff;
+}
+
+.user-author img {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.user-content {
+  cursor: pointer;
+  max-width: 80%;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.user-content .author-name {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+
+button {
+  right: 5%;
+  position: absolute;
+  background-color: transparent;
+  outline: none;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+  transition: color 0.5s ease;
+  text-align: center;
+  border: solid thin #333;
+  color: #333;
+}
+
+button:hover {
+  border-color: #D4AF37;
+  color: #D4AF37;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 800px) {
+  .input-container {
+    width: 80%;
+  }
+
+
+}

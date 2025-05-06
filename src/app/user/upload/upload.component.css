@@ -1,0 +1,86 @@
+.upload-form {
+  width: auto;
+  height: auto;
+  background-color: #222;
+  border: medium solid #B9B8B5;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+  margin: 0rem 1rem 1rem;
+
+}
+
+.upload-form h2 {
+  padding-top: 2rem;
+}
+
+
+@media screen and (max-width:800px) {
+  .upload-form h2 {
+    padding-top: 0rem;
+  }
+
+  .upload-form {
+    flex-direction: column;
+  }
+
+  .upload-form img {
+    width: 100% !important;
+    max-width: 90vw;
+    max-height: 30vh !important;
+  }
+}
+
+.upload-form img {
+  object-fit: cover;
+  max-width: 500px;
+  max-height: 500px;
+
+}
+
+form {
+  padding: 2rem;
+  padding-top: 0;
+  padding-bottom: 0.5rem;
+}
+
+.upload-form fieldset,
+.button-container {
+  margin: 30px auto !important;
+}
+
+
+.custom-file-upload input[type="file"] {
+  display: block;
+  width: 80%;
+  padding: 1rem;
+  padding-left: 0;
+  margin: 20px auto;
+  border: 2px solid #c49a32;
+  border-radius: 8px;
+  color: #333;
+  cursor: pointer;
+}
+
+.custom-file-upload input[type="file"]::-webkit-file-upload-button {
+  border: none;
+  background: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  color: #c49a32;
+}
+
+.custom-file-upload input[type="file"]::file-selector-button {
+  border: none;
+  background: none;
+  padding: 0 12px;
+  font-family: inherit;
+  font-size: inherit;
+  color: #c49a32;
+  cursor: pointer;
+}

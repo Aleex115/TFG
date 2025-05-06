@@ -1,23 +1,36 @@
 <div class="form-container">
-  <form class="form" [formGroup]="form" (ngSubmit)="enviar()">
-    <h2>Log in IMAGEHUB</h2>
+  <form
+    class="form"
+    [formGroup]="form"
+    (ngSubmit)="enviar()"
+    enctype="multipart/form-data"
+  >
+    <h2>Log in Image HUB</h2>
     <fieldset
-      [class]='(form.get("email")?.errors?.["email"] && form.value.email !=="") ? "red":"noe"'
+      [class]="
+        form.get('username')?.errors && form.value.username !== ''
+          ? 'red'
+          : 'none'
+      "
     >
-      <legend>Email</legend>
-      <input type="email" formControlName="email" />
+      <legend>Username</legend>
+      <input type="text" formControlName="username" autocomplete="username" />
     </fieldset>
     <fieldset
       [class]='(form.get("pwd")?.errors?.["minlength"] && form.value.pwd !=="") ? "red":"none"'
     >
       <legend>Password</legend>
-      <input type="password" formControlName="pwd" />
+      <input
+        type="password"
+        formControlName="pwd"
+        autocomplete="current-password"
+      />
     </fieldset>
 
-    <div>
+    <div class="button-container">
       <button class="form-button" [disabled]="form.invalid">Send</button>
       <input type="reset" value="Reset" class="form-button" />
     </div>
-    <a href="">You don't have an account already? Sign in here</a>
+    <a routerLink="/signin">You don't have an account already? Sign in here</a>
   </form>
 </div>

@@ -6,14 +6,20 @@ import {
   Validators,
 } from '@angular/forms';
 import { CustomValidator } from '../CustomValidator';
+import { UsuarioService } from '../usuario.service';
+import Swal from 'sweetalert2';
+import { RouterLink } from '@angular/router';
+import { AlertService } from '../alert.service';
 
 @Component({
   selector: 'app-sign-in',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.css',
 })
 export class SignInComponent {
+  constructor(private uS: UsuarioService, private alert: AlertService) {}
+
   form = new FormGroup({
     dni: new FormControl('', [Validators.required, CustomValidator.dni]),
     email: new FormControl('', [Validators.required, CustomValidator.email]),
@@ -25,9 +31,36 @@ export class SignInComponent {
     ]),
   });
   enviar() {
-    let fd = new FormData();
-    fd.append('dni', this.form.value.dni!);
-    fd.append('email', this.form.value.email!);
-    fd.append('pwd', this.form.value.pwd!);
+    this.uS
+      .signin(
+        this.form.value.dni!,
+        this.form.value.email!,
+        this.form.value.username!,
+        this.form.value.pwd!
+      )
+      .subscribe({
+        next: (res) => {
+          this.alert.showAlert(
+            'success',
+            'Successful signin',
+            'Welcome to the system'
+          );
+          this.form.setValue({
+            dni: '',
+            email: '',
+            username: '',
+            pwd: '',
+            ConfirmPwd: '',
+          });
+        },
+        error: (err) => {
+          console.log(err);
+          this.alert.showAlert(
+            'error',
+            err.error.title,
+            err.error.message || 'An unexpected error occurred'
+          );
+        },
+      });
   }
 }

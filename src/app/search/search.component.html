@@ -1,0 +1,29 @@
+<div class="input-container">
+  <input type="text" placeholder="Search a user" [(ngModel)]="username" />
+  <label (click)="search()">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </label>
+</div>
+@if (usersArray) {
+<div class="user-container">
+  @for (u of usersArray; track $index) {
+  <div class="user">
+    <div class="user-author" (click)="link(u)">
+      <img [src]="u.foto_perfil || 'user.png'" alt="Autor" />
+    </div>
+    <p class="user-content" (click)="link(u)">
+      <span class="author-name">{{ u.username }}</span>
+      {{ u.descp || "no description" }}
+    </p>
+    @if (u.peticion === 1) {
+    <button (click)="unfollow(u)">Requested</button>
+    } @else if (u.es_amigo === 0) {
+    <button (click)="follow(u)">Follow</button>
+    } @else {
+    <button (click)="unfollow(u)">Unfollow</button>
+
+    }
+  </div>
+  }
+</div>
+}

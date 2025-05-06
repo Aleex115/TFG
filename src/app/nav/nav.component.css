@@ -1,0 +1,133 @@
+footer {
+  background-color: #333;
+  position: fixed;
+  z-index: 11;
+  width: 100%;
+  bottom: 0;
+}
+
+footer ul {
+  width: 100%;
+  margin: 0;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  font-size: 1.5rem;
+  color: #B9B8B5;
+}
+
+footer ul li:hover,
+footer ul li:active {
+  color: #D4AF37;
+}
+
+footer ul li a.active,
+.nav ul li a.active {
+  color: #D4AF37;
+
+}
+
+@media screen and (min-width:800px) {
+  footer {
+    display: none;
+  }
+}
+
+@media screen and (max-width:800px) {
+  .nav {
+    display: none !important;
+  }
+}
+
+.nav {
+  background-color: #333;
+  position: sticky;
+  z-index: 11;
+  width: 100%;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+
+.nav div {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #D4AF37;
+}
+
+.bar {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  min-width: 380px;
+  height: 100px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.bar li {
+  position: relative;
+  list-style: none;
+  border-radius: 10px;
+}
+
+.bar li::before,
+.bar li::after {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+  content: "";
+  width: 0%;
+  height: 2px;
+  background-color: #B9B8B5;
+  transition: all 0.5s cubic-bezier(0.4, -1, 0.2, -1);
+}
+
+.bar li::before {
+  top: 0;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.bar li::after {
+  bottom: 0;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.bar li:hover::before,
+.bar li:hover::after {
+  width: 25%;
+  height: 3px;
+}
+
+.bar a {
+  text-decoration: none;
+  text-transform: uppercase;
+  display: block;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 700;
+
+}
+
+a {
+  color: #B9B8B5;
+}
+
+.bar li.active {
+  border-color: #333;
+}
+
+.bar li.active::before,
+.bar li.active::after {
+  width: 100%;
+  height: 50%;
+}

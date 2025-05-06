@@ -1,0 +1,368 @@
+/* Estilos de la nav bar */
+
+nav {
+  background-color: #333;
+  display: flex;
+  padding: 1rem 0.5rem;
+  width: 100%;
+}
+
+nav p {
+  color: #B9B8B5;
+  font-size: 0.9rem;
+  margin: 0.4rem 0;
+}
+
+nav img {
+  object-fit: cover;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+form img {
+  display: block;
+  margin: 0 auto;
+}
+
+nav>div {
+  color: #B9B8B5;
+  padding-left: 2rem;
+  width: 100%;
+  max-width: 300px;
+}
+
+b {
+  color: #D4AF37;
+}
+
+nav ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+@media screen and (max-width:800px) {
+  nav>div {
+    padding-left: 0.5rem;
+  }
+
+  nav img {
+    width: 60px !important;
+    height: 60px !important;
+  }
+
+  nav ul {
+    font-size: 0.8rem;
+  }
+}
+
+.container-button {
+  padding-top: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.container-button button,
+.flex button {
+  background-color: transparent;
+  outline: none;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+  transition: color 0.5s ease;
+  text-align: center;
+  border: solid thin #B9B8B5;
+  color: #B9B8B5;
+}
+
+.container-button button:hover,
+.flex button:hover {
+  border-color: #D4AF37;
+  color: #D4AF37;
+  cursor: pointer;
+}
+
+/* Estilos de la galería */
+.gallery img {
+  width: 100%;
+  object-fit: cover;
+  max-height: 600px;
+
+}
+
+.gallery {
+  margin: 1rem auto 3rem;
+  max-width: 1200px;
+  padding: 1rem;
+  columns: 320px;
+  height: 100%;
+  border-radius: 4px;
+}
+
+.gallery-item {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+.gallery-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.gallery-item:hover .hover {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease;
+}
+
+/* Estilos del hover de la galería */
+.hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease;
+}
+
+.delete {
+  top: 5%;
+  left: 5%;
+  position: absolute;
+  background-color: #333;
+  border-radius: 50%;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  color: #B9B8B5;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.down {
+  top: 5%;
+  right: 5%;
+  position: absolute;
+  background-color: #333;
+  outline: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-align: center;
+  border: none;
+  color: #B9B8B5;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.down:hover,
+.delete:hover {
+  background-color: #D4AF37;
+  color: #333;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+
+.hover>div {
+  position: absolute;
+  bottom: 0px;
+  display: flex;
+  width: 100%;
+  height: 100px;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+
+.hover label,
+.modal .likes label,
+.modal .input-container label {
+  background-color: #333;
+  padding: 0.6rem;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  transition: transform 0.3s ease;
+}
+
+.hover label i,
+.modal .likes label i,
+.modal .input-container label {
+  color: #B9B8B5;
+}
+
+.hover label:hover,
+.modal .likes label:hover,
+.modal .input-container label:hover {
+  transform: translateY(-2px);
+}
+
+.hover label i:hover,
+.modal .likes label i:hover,
+.modal .input-container label:hover {
+  color: #D4AF37;
+  cursor: pointer;
+}
+
+.input-container {
+  padding: 0.5rem 1rem;
+  background-color: #333;
+  color: #e0e0e0;
+  border: 1px solid #444;
+  border-radius: 0.5rem;
+  outline: none;
+  font-size: 0.9rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.input-container input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #B9B8B5;
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+.input-container input::placeholder {
+  color: #888;
+  font-style: italic;
+}
+
+.input-container label {
+  background-color: #B9B8B5;
+  color: #333;
+}
+
+.input-container label:hover {
+  color: #a18529;
+  cursor: pointer;
+}
+
+.input-container label i {
+  color: inherit;
+}
+
+.input-container::placeholder {
+  font-style: italic;
+}
+
+.like:checked+label i {
+  color: #D4AF37;
+}
+
+.like:checked+label i:hover {
+  color: #B9B8B5;
+}
+
+/* Estilos modal */
+
+dialog form {
+  width: 100%;
+}
+
+.hover-img-container {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: block;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.hover-img {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  position: absolute;
+  display: none;
+
+}
+
+.hover-img i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #B9B8B5;
+}
+
+
+.hover-img-container img {
+  object-fit: cover;
+  width: 99px;
+  height: 99px;
+  border-radius: 50%;
+
+}
+
+.hover-img-container:hover .hover-img {
+  display: block;
+  background-color: #000c;
+  cursor: pointer;
+}
+
+.radio-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.radio-container label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #b9b8b5;
+  cursor: pointer;
+}
+
+.form label {
+  margin: 0;
+}
+
+.radio-container input[type="radio"] {
+  accent-color: #d4af37;
+  transform: scale(1.2);
+}

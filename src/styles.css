@@ -3,25 +3,34 @@
 * {
   font-family: "Noto Sans",
     sans-serif;
+  box-sizing: border-box;
 }
 
+
+
 .form-container {
+  position: absolute;
+  top: 0;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+  padding-top: 5%;
   display: grid;
   place-items: center;
   background-image: url("./../public/background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  background-color: #00000008;
-  background-blend-mode: color;
+  background-color: rgba(0, 0, 0, 0.8);
+  background-blend-mode: multiply;
+  z-index: 1;
 }
 
 .form {
-  width: 40%;
+  width: 80%;
+  max-width: 450px;
   background-color: #222;
   border: medium solid #B9B8B5;
-  padding: 1rem;
+  padding: 0.5rem;
+  padding-top: 0;
   border-radius: 0.5rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -33,21 +42,24 @@
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-.form h2 {
+.form h2,
+.upload-form h2 {
   color: #D4AF37;
   text-align: center;
 }
 
-.form fieldset {
+.form fieldset,
+.upload-form fieldset {
   color: #B9B8B5;
   width: 80%;
-  margin: 20px auto;
+  margin: 10px auto;
   border-radius: 0.5rem;
   border-color: #B9B8B5;
   transition: color 0.5s ease, border 0.5s ease, ;
 }
 
-.form fieldset input {
+.form fieldset input,
+.upload-form input {
   background-color: transparent;
   outline: none;
   border: none;
@@ -56,23 +68,23 @@
 }
 
 
-.form fieldset:has(input:focus) {
+.form fieldset:has(input:focus),
+.upload-form fieldset:has(input:focus) {
   border-color: #D4AF37;
   color: #D4AF37;
   transition: color 0.5s ease, border 0.5s ease, ;
 }
 
-
-
-.form div {
-  margin: 40px auto;
+.button-container {
+  margin: 20px auto;
   display: flex;
-  width: 60%;
+  width: 80%;
   align-items: center;
   justify-content: space-between;
 }
 
-.form .form-button {
+.form .form-button,
+.upload-form .form-button {
   background-color: #D3C289;
   color: #222;
   outline: none;
@@ -82,28 +94,32 @@
   padding: 0.5rem 1rem;
   font-size: 1rem;
   transition: color 0.5s ease, background 0.5s ease, transform 0.5s ease;
-
+  text-align: center;
 }
 
-.form .form-button:hover {
+.form .form-button:hover,
+.upload-form .form-button:hover {
   background-color: #D4AF37;
   cursor: pointer;
   transform: scale(1.01);
 }
 
-.form button:disabled {
+.form button:disabled,
+.upload-form button:disabled {
   background-color: #f2e4b6;
 }
 
-.form button:disabled:hover {
+.form button:disabled:hover,
+.upload-form button:disabled:hover {
   background-color: #f2e4b6;
   cursor: default;
   transform: scale(1.0);
 }
 
-.form a {
+.form a,
+.upload-form a {
   display: block;
-  margin: 30px auto 20px;
+  margin: 0px auto 20px;
   width: 80%;
   text-emphasis: center;
   color: #B9B8B5;
@@ -118,4 +134,89 @@
 .form label {
   margin: -60px 30px 0px;
   font-size: 0.7rem;
+}
+
+.swal-custom-button {
+  background-color: #D3C289 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 5px !important;
+  padding: 10px 20px !important;
+  font-size: 16px !important;
+}
+
+@media screen and (min-width:800px) {
+  .form-container {
+    padding: 0;
+    padding-top: 10vh;
+  }
+}
+
+@media screen and (max-width:800px) {
+
+  .form-container {
+    align-items: start;
+    height: 100vh;
+  }
+
+  .form fieldset {
+    margin: 10px auto;
+  }
+}
+
+.btn-accept {
+  background-color: #28a745;
+  /* Verde */
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin: 0 20px;
+}
+
+.btn-accept:hover {
+  background-color: #218838;
+  /* Verde más oscuro */
+  transform: scale(1.05);
+}
+
+/* Botón de eliminar */
+.btn-delete {
+  background-color: #dc3545;
+  /* Rojo */
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin: 0 20px;
+}
+
+.btn-delete:hover {
+  background-color: #c82333;
+  /* Rojo más oscuro */
+  transform: scale(1.05);
+}
+
+
+
+dialog {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  background-color: transparent;
+  position: relative;
+  max-width: 400px;
+  width: 90%;
+  margin: auto;
+}
+
+dialog::backdrop {
+  background: #000c;
 }
