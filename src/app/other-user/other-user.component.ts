@@ -102,7 +102,7 @@ export class OtherUserComponent implements AfterViewInit {
     if (this.offset <= this.total && !this.loading) {
       this.loading = true;
       console.log('piediendo');
-      this.pS.getAll(this.offset, this.username).subscribe({
+      this.pS.getAllUser(this.offset, this.username).subscribe({
         next: (res: any) => {
           if (res && res.publicaciones) {
             this.publicaciones.push(...res.publicaciones);

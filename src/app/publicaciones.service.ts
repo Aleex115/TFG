@@ -11,9 +11,9 @@ export class PublicacionesService {
   upload(fd: FormData) {
     return this.http.post(this.url + 'upload', fd, { withCredentials: true });
   }
-  getAll(offset: number, username: string = '') {
+  getAllUser(offset: number, username: string = '') {
     return this.http.get(
-      this.url + `getPublicaciones?username=${username}&offset=${offset}`,
+      this.url + `getPublicacionesUser?username=${username}&offset=${offset}`,
       {
         withCredentials: true,
       }
