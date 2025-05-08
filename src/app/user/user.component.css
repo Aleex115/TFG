@@ -29,7 +29,7 @@ nav>div {
   color: #B9B8B5;
   padding-left: 2rem;
   width: 100%;
-  max-width: 300px;
+  max-width: 350px;
 }
 
 b {
@@ -56,6 +56,10 @@ nav ul {
   nav ul {
     font-size: 0.8rem;
   }
+
+  .margin button {
+    font-size: 0.6rem !important;
+  }
 }
 
 .container-button {
@@ -64,8 +68,14 @@ nav ul {
   justify-content: space-between;
 }
 
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .container-button button,
-.flex button {
+.flex div button {
   background-color: transparent;
   outline: none;
   border-radius: 0.25rem;
@@ -77,6 +87,13 @@ nav ul {
   color: #B9B8B5;
 }
 
+.margin {
+  display: flex;
+  gap: 15px;
+}
+
+
+
 .container-button button:hover,
 .flex button:hover {
   border-color: #D4AF37;
@@ -84,220 +101,35 @@ nav ul {
   cursor: pointer;
 }
 
-/* Estilos de la galería */
-.gallery img {
-  width: 100%;
-  object-fit: cover;
-  max-height: 600px;
-
-}
-
-.gallery {
-  margin: 1rem auto 3rem;
-  max-width: 1200px;
-  padding: 1rem;
-  columns: 320px;
-  height: 100%;
-  border-radius: 4px;
-}
-
-.gallery-item {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  margin-bottom: 1rem;
-}
-
-.gallery-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-
-.gallery-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
-}
-
-.gallery-item:hover .hover {
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 0.5s ease;
-}
-
-/* Estilos del hover de la galería */
-.hover {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  width: 100%;
-  height: 100%;
-  border-radius: 4px;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.5s ease;
-}
-
-.delete {
-  top: 5%;
-  left: 5%;
-  position: absolute;
-  background-color: #333;
-  border-radius: 50%;
-  padding: 1rem;
-  font-size: 1rem;
-  font-weight: 500;
-  border: none;
-  color: #B9B8B5;
-  display: flex;
-  align-items: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-}
-
-.down {
-  top: 5%;
-  right: 5%;
-  position: absolute;
-  background-color: #333;
-  outline: none;
-  border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  text-align: center;
-  border: none;
-  color: #B9B8B5;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-}
-
-.down:hover,
-.delete:hover {
-  background-color: #D4AF37;
-  color: #333;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-}
-
-
-.hover>div {
-  position: absolute;
-  bottom: 0px;
-  display: flex;
-  width: 100%;
-  height: 100px;
-  align-items: center;
-  justify-content: space-between;
-  padding-left: 5%;
-  padding-right: 5%;
-}
-
-
-.hover label,
-.modal .likes label,
-.modal .input-container label {
-  background-color: #333;
-  padding: 0.6rem;
-  border-radius: 50%;
-  width: 42px;
-  height: 42px;
-  display: grid;
-  place-items: center;
-  transition: transform 0.3s ease;
-}
-
-.hover label i,
-.modal .likes label i,
-.modal .input-container label {
-  color: #B9B8B5;
-}
-
-.hover label:hover,
-.modal .likes label:hover,
-.modal .input-container label:hover {
-  transform: translateY(-2px);
-}
-
-.hover label i:hover,
-.modal .likes label i:hover,
-.modal .input-container label:hover {
-  color: #D4AF37;
-  cursor: pointer;
-}
-
-.input-container {
-  padding: 0.5rem 1rem;
-  background-color: #333;
-  color: #e0e0e0;
-  border: 1px solid #444;
-  border-radius: 0.5rem;
-  outline: none;
-  font-size: 0.9rem;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.input-container input {
-  background: transparent;
-  border: none;
-  outline: none;
-  color: #B9B8B5;
-  font-size: 0.9rem;
-  width: 100%;
-}
-
-.input-container input::placeholder {
-  color: #888;
-  font-style: italic;
-}
-
-.input-container label {
-  background-color: #B9B8B5;
-  color: #333;
-}
-
-.input-container label:hover {
-  color: #a18529;
-  cursor: pointer;
-}
-
-.input-container label i {
-  color: inherit;
-}
-
-.input-container::placeholder {
-  font-style: italic;
-}
-
-.like:checked+label i {
-  color: #D4AF37;
-}
-
-.like:checked+label i:hover {
-  color: #B9B8B5;
-}
-
 /* Estilos modal */
 
 dialog form {
   width: 100%;
+}
+
+dialog {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  animation: none;
+}
+
+dialog[open] {
+  opacity: 1;
+  transform: scale(1);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .hover-img-container {
@@ -365,4 +197,144 @@ dialog form {
 .radio-container input[type="radio"] {
   accent-color: #d4af37;
   transform: scale(1.2);
+}
+
+
+
+
+.petitions {
+  width: 90%;
+  max-width: 800px;
+  background-color: #fff;
+}
+
+
+.user-container {
+  margin: 0 auto;
+  max-width: 550px;
+  overflow-y: auto;
+  max-height: 58%;
+  margin-top: 20px;
+}
+
+.user {
+  position: relative;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  background-color: #fff;
+}
+
+.user-author img {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.user-content {
+  cursor: pointer;
+  max-width: 40%;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.user-content .author-name {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.user-container .button {
+  position: absolute;
+  right: 3%;
+  display: flex;
+  gap: 10px;
+}
+
+.user-container button {
+
+  background-color: transparent;
+  outline: none;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+  transition: color 0.5s ease;
+  text-align: center;
+  border: solid thin #333;
+  color: #333;
+}
+
+.user-container button:hover {
+  border-color: #D4AF37;
+  color: #D4AF37;
+  cursor: pointer;
+}
+
+
+
+.input-container {
+  margin: 20px auto;
+  max-width: 550px;
+  padding: 0.5rem 1rem;
+  background-color: #333;
+  color: #e0e0e0;
+  border: 1px solid #444;
+  border-radius: 0.5rem;
+  outline: none;
+  font-size: 0.9rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.input-container label {
+  background-color: #333;
+  padding: 0.6rem;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  transition: transform 0.3s ease;
+}
+
+.input-container input {
+  font-size: 1.1rem;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #B9B8B5;
+  width: 100%;
+}
+
+.input-container input::placeholder {
+  color: #888;
+  font-style: italic;
+}
+
+.input-container label {
+  background-color: #B9B8B5;
+  color: #333;
+}
+
+.input-container label:hover {
+  color: #a18529;
+  cursor: pointer;
+}
+
+.input-container label i {
+  color: inherit;
+}
+
+.input-container::placeholder {
+  font-style: italic;
 }

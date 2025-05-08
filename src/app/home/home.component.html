@@ -14,3 +14,8 @@
     style="background-image: url('2.jpg'); background-position: center"
   ></section>
 </div>
+@if (publicaciones) {
+
+<app-gallery [publicaciones]="publicaciones" [session]="false"></app-gallery>
+<div #scrollAnchor></div>
+}

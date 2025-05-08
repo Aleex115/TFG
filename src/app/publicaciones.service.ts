@@ -19,6 +19,11 @@ export class PublicacionesService {
       }
     );
   }
+  getAllPublic(offset: number) {
+    return this.http.get(this.url + `getPublicacionesPublic?offset=${offset}`, {
+      withCredentials: true,
+    });
+  }
   deletePubli(id: string, public_id: string, dni: string = '') {
     let params = { dni, id, public_id };
     return this.http.delete(this.url + 'deletePubli', {

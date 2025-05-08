@@ -1,40 +1,31 @@
 import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { UsuarioService } from '../usuario.service';
 import { PublicacionesService } from '../publicaciones.service';
-import { LikeService } from '../like.service';
-import Swal from 'sweetalert2';
-import {
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertService } from '../alert.service';
-import { ComentarioService } from '../comentario.service';
-import { CustomValidator } from '../CustomValidator';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { GalleryComponent } from '../gallery/gallery.component';
+import { FollowService } from '../follow.service';
+import { PetitionService } from '../petition.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-other-user',
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, GalleryComponent],
   templateUrl: './other-user.component.html',
   styleUrl: './other-user.component.css',
 })
 export class OtherUserComponent implements AfterViewInit {
   //Es como el document.getElementById pero con algunas mejoras y elementRef es una clase de angular
   @ViewChild('scrollAnchor') scrollAnchor!: ElementRef;
-  @ViewChild('download') download!: ElementRef;
-  @ViewChild('dropdown-menu') dropdownMenu!: ElementRef;
 
   constructor(
     private uS: UsuarioService,
     private pS: PublicacionesService,
-    private lS: LikeService,
-    private cS: ComentarioService,
-    private alert: AlertService,
-    private router: Router,
-    private ar: ActivatedRoute
+    private ar: ActivatedRoute,
+    private fS: FollowService,
+    private ptS: PetitionService,
+    private alert: AlertService
   ) {
     ar.paramMap.subscribe(
       (el: ParamMap) => (this.username = el.get('username'))
@@ -44,8 +35,6 @@ export class OtherUserComponent implements AfterViewInit {
   user: any;
   username: any;
   publication: any;
-  comments: any;
-  likes: any;
   formato = 'JPG';
   calidad = 80;
 
@@ -61,36 +50,16 @@ export class OtherUserComponent implements AfterViewInit {
 
   loading = false;
 
-  comentario = '';
-
-  editProfileForm: any;
-
-  dropdownOpen = false;
-
-  toggleDropdown() {
-    this.dropdownOpen = !this.dropdownOpen;
-  }
-
-  closeDropdown(event: MouseEvent) {
-    const target = event.target as HTMLElement;
-    const dropdownMenu = document.querySelector('.dropdown-menu');
-    if (dropdownMenu && !dropdownMenu.contains(target)) {
-      this.dropdownOpen = false;
-    }
-  }
-
   ngOnInit() {
     this.uS.getOne(this.username).subscribe((res: any) => {
+      console.log(res.user);
       this.user = res.user;
       this.fotoUrl = res.user.foto_perfil || 'user.png';
-      this.previewUrl = this.fotoUrl;
     });
     this.getPublicaciones();
 
     //Por si las imágenes no tienen el suficiente tamaño para generar el scroll
     setTimeout(() => {
-      console.log('Body height:', document.body.offsetHeight);
-      console.log('Window height:', window.innerHeight);
       if (window.innerHeight <= document.body.offsetHeight) {
         this.getPublicaciones();
       }
@@ -101,7 +70,7 @@ export class OtherUserComponent implements AfterViewInit {
     console.log(this.offset);
     if (this.offset <= this.total && !this.loading) {
       this.loading = true;
-      console.log('piediendo');
+
       this.pS.getAllUser(this.offset, this.username).subscribe({
         next: (res: any) => {
           if (res && res.publicaciones) {
@@ -130,7 +99,6 @@ export class OtherUserComponent implements AfterViewInit {
     //El observer se ejecuta cada vez que hay un cambio en isIntersecting que es un boolean de si el elemento se ve o no
     const observer = new IntersectionObserver(
       (entries) => {
-        console.log('prueba');
         if (entries[0].isIntersecting && !this.loading) {
           this.getPublicaciones();
         }
@@ -138,19 +106,18 @@ export class OtherUserComponent implements AfterViewInit {
       { threshold: 0.1, rootMargin: '300px' }
     );
     observer.observe(this.scrollAnchor.nativeElement);
-    document.addEventListener('click', (event) => this.closeDropdown(event));
   }
 
-  like(id: string, e: Event) {
-    let checkbox = e.target as HTMLInputElement;
-    console.log(e.target);
-    if (checkbox.checked) {
-      this.publication.hasLiked = 1;
-      this.likes++;
-      console.log('like');
-      this.lS.giveLike(id).subscribe({
+  follow(u: any) {
+    if (u.es_amigo === 1) {
+      return;
+    }
+    if (u.id_estadoU === 0) {
+      console.log('Perfil publico');
+      this.fS.follow(u.dni).subscribe({
         next: (res: any) => {
           console.log(res);
+          this.alert.showAlert('success', 'OK', 'Followed successfully');
         },
         error: (err) => {
           console.log(err);
@@ -159,42 +126,15 @@ export class OtherUserComponent implements AfterViewInit {
             err.error.title,
             err.error.message || 'An unexpected error occurred'
           );
-          this.loading = false;
-        },
-      });
-    } else {
-      this.publication.hasLiked = 0;
-      this.likes--;
-
-      this.lS.deleteLike(id).subscribe({
-        next: (res: any) => {
-          console.log(res);
-        },
-        error: (err) => {
-          console.log(err);
-          this.alert.showAlert(
-            'error',
-            err.error.title,
-            err.error.message || 'An unexpected error occurred'
-          );
-          this.loading = false;
         },
       });
     }
-  }
-
-  clear() {
-    this.comentario = '';
-  }
-  comment(id: string) {
-    this.close();
-    if (!this.comentario) {
-      this.alert.showAlert('error', 'Error', "You can't send an empty comment");
-    } else {
-      this.cS.writeComment(id, this.comentario).subscribe({
+    if (u.id_estadoU === 1) {
+      console.log('Perfil publico');
+      this.ptS.request(u.dni).subscribe({
         next: (res: any) => {
           console.log(res);
-          this.alert.showAlert('success', 'OK', 'Comment posted successfully');
+          this.alert.showAlert('success', 'OK', 'Requested successfully');
         },
         error: (err) => {
           console.log(err);
@@ -207,122 +147,74 @@ export class OtherUserComponent implements AfterViewInit {
       });
     }
   }
-
-  closeOnOutsideClick(event: MouseEvent) {
-    let dialogos = [this.download];
-    dialogos.forEach((el) => {
-      const dialogElement = el.nativeElement as HTMLDialogElement;
-      if (event.target === dialogElement) {
-        dialogElement.close();
-      }
-    });
-  }
-
-  close() {
-    this.download.nativeElement.close();
-  }
-
-  onFileSelected(event: Event): void {
-    let input = event.target as HTMLInputElement;
-
-    if (input.files && input.files[0]) {
-      let file = input.files[0];
-      let reader = new FileReader();
-
-      reader.onload = () => {
-        this.previewUrl = reader.result;
-      };
-
-      reader.readAsDataURL(file);
-    }
-  }
-
-  savePublication(publi: any) {
-    this.publication = publi;
-    this.cS.getAllComment(publi.id).subscribe({
-      next: (res: any) => {
-        console.log(res);
-        this.comments = res.comments;
+  unfollow(u: any) {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn-accept',
+        cancelButton: 'btn-delete',
       },
-      error: (err) => {
-        Swal.close();
-        console.log(err);
-        this.alert.showAlert(
-          'error',
-          err.error.title,
-          err.error.message || 'An unexpected error occurred'
-        );
-        if (err.status === 401) {
-          this.router.navigate(['/login']);
-        }
-      },
-    });
-    this.lS.getAll(publi.id).subscribe({
-      next: (res: any) => {
-        console.log(res);
-        this.likes = res.total;
-      },
-      error: (err) => {
-        Swal.close();
-        console.log(err);
-        this.alert.showAlert(
-          'error',
-          err.error.title,
-          err.error.message || 'An unexpected error occurred'
-        );
-        if (err.status === 401) {
-          this.router.navigate(['/login']);
-        }
-      },
-    });
-    this.download.nativeElement.showModal();
-  }
-
-  downloadImage() {
-    this.close();
-
-    Swal.fire({
-      title: 'Downloading...',
-      text: 'Please wait while your file is being downloaded.',
-      allowOutsideClick: false,
+      buttonsStyling: false,
       theme: 'dark',
       backdrop: '#000c',
-      // como un domcontentload pero de s2a
-      didOpen: () => {
-        Swal.showLoading();
-      },
     });
-    try {
-      this.pS
-        .download(this.publication.foto, this.formato, this.calidad)
-        .subscribe({
-          next: (res: any) => {
-            console.log(res);
-            Swal.close();
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(res);
-            a.download = `${
-              this.publication.title
-            }.${this.formato.toLowerCase()}`;
-            a.click();
 
-            URL.revokeObjectURL(a.href);
-          },
-          error: (err) => {
-            Swal.close();
-            console.log(err);
-            this.alert.showAlert(
-              'error',
-              err.error.title,
-              err.error.message || 'An unexpected error occurred'
-            );
-            if (err.status === 401) {
-              this.router.navigate(['/login']);
-            }
-          },
-        });
-    } catch (error) {
-      console.error('Error al descargar la imagen:', error);
-    }
+    swalWithBootstrapButtons
+      .fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true,
+      })
+      .then((result: any) => {
+        if (result.isConfirmed) {
+          // Aquí puedes llamar al servicio para eliminar el elemento
+          if (u.peticion == 1) {
+            this.ptS.cancelRequest(u.dni).subscribe({
+              next: (res: any) => {
+                console.log(res);
+                if (res.status === 200) {
+                  swalWithBootstrapButtons.fire(
+                    'Unfollowed!',
+                    'You finish the following',
+                    'success'
+                  );
+                }
+              },
+              error: (err) => {
+                swalWithBootstrapButtons.fire(
+                  err.error.title,
+                  err.error.message || 'An unexpected error occurred',
+                  'error'
+                );
+              },
+            });
+          } else {
+            this.fS.unfollow(u.dni).subscribe({
+              next: (res: any) => {
+                console.log(res);
+                if (res.status === 200) {
+                  swalWithBootstrapButtons.fire(
+                    'Unfollowed!',
+                    'You finish the following',
+                    'success'
+                  );
+                }
+              },
+              error: (err) => {
+                swalWithBootstrapButtons.fire(
+                  err.error.title,
+                  err.error.message || 'An unexpected error occurred',
+                  'error'
+                );
+              },
+            });
+          }
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire('Cancelled', '', 'error');
+        }
+      });
   }
 }

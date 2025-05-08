@@ -53,6 +53,8 @@ export class SearchComponent {
       this.fS.follow(u.dni).subscribe({
         next: (res: any) => {
           console.log(res);
+          this.reload();
+
           this.alert.showAlert('success', 'OK', 'Followed successfully');
         },
         error: (err) => {
@@ -70,6 +72,8 @@ export class SearchComponent {
       this.pS.request(u.dni).subscribe({
         next: (res: any) => {
           console.log(res);
+          this.reload();
+
           this.alert.showAlert('success', 'OK', 'Requested successfully');
         },
         error: (err) => {
@@ -111,10 +115,11 @@ export class SearchComponent {
             this.pS.cancelRequest(u.dni).subscribe({
               next: (res: any) => {
                 console.log(res);
+                this.reload();
                 if (res.status === 200) {
                   swalWithBootstrapButtons.fire(
-                    'Unfollowed!',
-                    'You finish the following',
+                    'Canceled!',
+                    'You canceled the request',
                     'success'
                   );
                 }
@@ -163,5 +168,10 @@ export class SearchComponent {
         'You need to follow him'
       );
     }
+  }
+  reload() {
+    setTimeout(() => {
+      window.location.reload();
+    }, 1500);
   }
 }

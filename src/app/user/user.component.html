@@ -4,7 +4,12 @@
   <div>
     <div class="flex">
       <h3>{{ user.username }}</h3>
-      <button (click)="logout()">Log out</button>
+      <div class="margin">
+        @if ( user.id_estadoU === 1 ) {
+        <button (click)="showPet()">Show petitions</button>
+        }
+        <button (click)="logout()">Log out</button>
+      </div>
     </div>
     <p>{{ user.descp }}</p>
 
@@ -15,65 +20,21 @@
       <li>
         Friends: <b>{{ user.amigos }}</b>
       </li>
-      @if (user.id_estadoU=== 0) {
+      @if (user.id_estadoU === 0) {
       <li>User: <b>Public</b></li>
-
-      }@else {
+      } @else {
       <li>User: <b>Private</b></li>
-
       }
     </ul>
     <div class="container-button">
       <button (click)="editProfile()">Edit profile</button>
-
       <button (click)="editPwd()">Edit password</button>
     </div>
   </div>
 </nav>
 } @if (publicaciones) {
-
-<div class="gallery">
-  @for (publi of publicaciones; track $index) {
-  <div class="gallery-item" (click)="savePublication(publi)">
-    <img [src]="publi.foto" alt="" />
-    <div class="hover" (mouseleave)="clear()">
-      <button class="delete" (click)="delete(publi.id, publi.public_id)">
-        <i class="fa-solid fa-trash"></i>
-      </button>
-      <button class="down" (click)="savePublication(publi)">
-        <i class="fa-solid fa-down-long fa-xs"></i>Download
-      </button>
-      <div>
-        <div class="heart">
-          <input
-            type="checkbox"
-            class="like"
-            [id]="'heart' + publi.id"
-            hidden
-            (change)="like(publi.id, $event)"
-            [checked]="publi.hasLiked === 1"
-          />
-
-          <label [for]="'heart' + publi.id"
-            ><i class="fa-solid fa-heart fa-xl"></i
-          ></label>
-        </div>
-        <div class="input-container">
-          <input
-            type="text"
-            placeholder="Write a comment"
-            [(ngModel)]="comentario"
-          />
-          <label (click)="comment(publi.id)">
-            <i class="fa-solid fa-paper-plane"></i>
-          </label>
-        </div>
-      </div>
-    </div>
-  </div>
-  }
-  <div #scrollAnchor class="scroll"></div>
-</div>
+<app-gallery [publicaciones]="publicaciones" [session]="true"></app-gallery>
+<div #scrollAnchor></div>
 } @if (user) {
 <dialog #editProfileDialog (click)="closeOnOutsideClick($event)">
   <form
@@ -190,114 +151,35 @@
     </div>
   </form>
 </dialog>
-<dialog class="modal" #download (click)="closeOnOutsideClick($event)">
-  @if (publication) {
-  <img [src]="publication.foto" alt="" />
-  <div>
-    <h3>{{ publication.title }}</h3>
-    <p>
-      {{ publication.descp }}
-    </p>
-
-    <div class="dropdown-menu" [class.open]="dropdownOpen" #dropdownMenu>
-      <button class="dropdown-toggle" (click)="toggleDropdown()">
-        <i class="fa-solid fa-down-long fa-xs"></i>Download
-      </button>
-      <div class="dropdown-content">
-        <div class="flex">
-          <div>
-            <label class="dropdown-item">
-              <input
-                type="radio"
-                name="dropdown-option"
-                value="JPG"
-                checked
-                [(ngModel)]="formato"
-              />
-              JPG
-            </label>
-            <label class="dropdown-item">
-              <input
-                type="radio"
-                name="dropdown-option"
-                value="PNG"
-                [(ngModel)]="formato"
-              />
-              PNG
-            </label>
-            <label class="dropdown-item">
-              <input
-                type="radio"
-                name="dropdown-option"
-                value="WEBP"
-                [(ngModel)]="formato"
-              />
-              WEBP
-            </label>
-          </div>
-          <div class="wrapper">
-            <input
-              type="range"
-              min="0"
-              max="100"
-              step="5"
-              [(ngModel)]="calidad"
-            />
-          </div>
-        </div>
-
-        <hr />
-        <button class="dropdown-toggle" (click)="downloadImage()">
-          Download image
-        </button>
-      </div>
-    </div>
-    <div class="button-container">
-      <div class="likes">
-        <p>{{ likes }}</p>
-
-        <div class="heart">
-          <input
-            type="checkbox"
-            class="like"
-            [id]="'heart' + publication.id"
-            hidden
-            (change)="like(publication.id, $event)"
-            [checked]="publication.hasLiked === 1"
-          />
-
-          <label [for]="'heart' + publication.id"
-            ><i class="fa-solid fa-heart fa-xl"></i
-          ></label>
-        </div>
-      </div>
-      <div class="input-container">
-        <input
-          type="text"
-          placeholder="Write a comment"
-          [(ngModel)]="comentario"
-        />
-        <label (click)="comment(publication.id)">
-          <i class="fa-solid fa-paper-plane"></i>
-        </label>
-      </div>
-    </div>
-
-    <div class="comment-container">
-      @for (comment of comments; track $index) {
-      <div class="comment">
-        <div class="comment-author">
-          <img [src]="comment.foto_perfil" alt="Autor" />
-        </div>
-        <p class="comment-content">
-          <span class="author-name">{{ comment.username }}</span>
-          {{ comment.comentario }}
-        </p>
-      </div>
-      }
-    </div>
+} @if (petitions) {
+<dialog #showPetitions (click)="closeOnOutsideClick($event)" class="petitions">
+  <div class="input-container">
+    <input
+      type="text"
+      placeholder="Search a user"
+      [(ngModel)]="userPetition"
+      (input)="filter()"
+    />
+    <label>
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </label>
   </div>
-  }
+  <div class="user-container">
+    @for (u of petitionsFiltered; track $index) {
+    <div class="user">
+      <div class="user-author" (click)="link(u)">
+        <img [src]="u.foto_perfil || 'user.png'" alt="Autor" />
+      </div>
+      <p class="user-content" (click)="link(u)">
+        <span class="author-name">{{ u.username }}</span>
+        {{ u.descp || "no description" }}
+      </p>
+      <div class="button">
+        <button (click)="allow(u)">Accept</button>
+        <button (click)="reject(u)">Reject</button>
+      </div>
+    </div>
+    }
+  </div>
 </dialog>
-
 }
