@@ -15,9 +15,9 @@
       <span class="author-name">{{ u.username }}</span>
       {{ u.descp || "no description" }}
     </p>
-    @if (u.peticion === 1) {
+    @if (u.peticion == 1) {
     <button (click)="unfollow(u)">Requested</button>
-    } @else if (u.es_amigo === 0) {
+    } @else if (u.es_amigo == 0) {
     <button (click)="follow(u)">Follow</button>
     } @else {
     <button (click)="unfollow(u)">Unfollow</button>

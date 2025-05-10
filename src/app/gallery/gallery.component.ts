@@ -6,7 +6,6 @@ import { AlertService } from '../alert.service';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-gallery',
@@ -17,6 +16,8 @@ import { filter } from 'rxjs';
 export class GalleryComponent {
   @Input() publicaciones: any[] = [];
   @Input() session = false;
+  @Input() dni: any;
+
   @ViewChild('download') download!: ElementRef;
   @ViewChild('dropdown-menu') dropdownMenu!: ElementRef;
 
@@ -165,6 +166,7 @@ export class GalleryComponent {
   }
 
   savePublication(publi: any) {
+    console.log(this.dni);
     console.log(publi);
     this.publication = publi;
     this.cS.getAllComment(publi.id).subscribe({
@@ -288,6 +290,22 @@ export class GalleryComponent {
       animationElement.classList.add(
         'heart-animation',
         checkbox.checked ? 'like' : 'unlike'
+      );
+    }
+  }
+  link(u: any) {
+    this.download.nativeElement.close();
+
+    if (u.es_amigo == 1 || u.id_estadou == 0 || this.dni.dni == u.dni) {
+      this.router.navigate(['/user', u.username]);
+      setTimeout(() => {
+        window.location.reload();
+      }, 100);
+    } else {
+      this.alert.showAlert(
+        'error',
+        'The profile is private ',
+        'You need to follow him'
       );
     }
   }

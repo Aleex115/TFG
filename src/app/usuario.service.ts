@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class UsuarioService {
   constructor(private http: HttpClient) {}
-  url = 'http://localhost:3000/';
+  url = 'https://image-hub-five.vercel.app/';
   login(username: string, pwd: string) {
     let fd = new FormData();
     fd.append('username', username.trim());
@@ -46,5 +46,8 @@ export class UsuarioService {
   }
   logout() {
     return this.http.get(this.url + 'logout', { withCredentials: true });
+  }
+  delete() {
+    return this.http.delete(this.url + 'deleteUser', { withCredentials: true });
   }
 }

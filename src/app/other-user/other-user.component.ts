@@ -52,8 +52,8 @@ export class OtherUserComponent implements AfterViewInit {
 
   ngOnInit() {
     this.uS.getOne(this.username).subscribe((res: any) => {
-      console.log(res.user);
       this.user = res.user;
+      console.log(this.user);
       this.fotoUrl = res.user.foto_perfil || 'user.png';
     });
     this.getPublicaciones();
@@ -112,7 +112,7 @@ export class OtherUserComponent implements AfterViewInit {
     if (u.es_amigo === 1) {
       return;
     }
-    if (u.id_estadoU === 0) {
+    if (u.id_estadou === 0) {
       console.log('Perfil publico');
       this.fS.follow(u.dni).subscribe({
         next: (res: any) => {
@@ -129,10 +129,13 @@ export class OtherUserComponent implements AfterViewInit {
         },
       });
     }
-    if (u.id_estadoU === 1) {
+    if (u.id_estadou === 1) {
       console.log('Perfil publico');
       this.ptS.request(u.dni).subscribe({
         next: (res: any) => {
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
           console.log(res);
           this.alert.showAlert('success', 'OK', 'Requested successfully');
         },
@@ -164,13 +167,15 @@ export class OtherUserComponent implements AfterViewInit {
         text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!',
+        confirmButtonText: 'Yes, unfollow it!',
         cancelButtonText: 'No, cancel!',
         reverseButtons: true,
       })
       .then((result: any) => {
         if (result.isConfirmed) {
-          // Aquí puedes llamar al servicio para eliminar el elemento
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
           if (u.peticion == 1) {
             this.ptS.cancelRequest(u.dni).subscribe({
               next: (res: any) => {

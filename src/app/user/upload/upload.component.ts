@@ -71,6 +71,7 @@ export class UploadComponent {
     if (fileInput.files && fileInput.files[0]) {
       fd.append('img', fileInput.files[0]);
       fileInput.value = ''; // Vacía el valor del file input
+      this.previewUrl = '';
     }
 
     this.form.setValue({

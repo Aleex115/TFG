@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class LikeService {
   constructor(private http: HttpClient) {}
-  url = 'http://localhost:3000/';
+  url = 'https://image-hub-five.vercel.app/';
 
   giveLike(id: string, dni: string = '') {
     let json = { dni, id }; // No es necesario convertirlo a string

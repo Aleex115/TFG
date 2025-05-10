@@ -6,7 +6,7 @@ import { EnvironmentInjector, Injectable } from '@angular/core';
 })
 export class PublicacionesService {
   constructor(private http: HttpClient) {}
-  url = 'http://localhost:3000/';
+  url = 'https://image-hub-five.vercel.app/';
 
   upload(fd: FormData) {
     return this.http.post(this.url + 'upload', fd, { withCredentials: true });

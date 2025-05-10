@@ -12,7 +12,7 @@
       <li>
         Friends: <b>{{ user.amigos }}</b>
       </li>
-      @if (user.id_estadoU=== 0) {
+      @if (user. id_estadou == 0) {
       <li>User: <b>Public</b></li>
 
       }@else {
@@ -21,9 +21,9 @@
       }
     </ul>
     <div class="container-button">
-      @if (user.peticion === 1) {
+      @if (user.peticion == 1) {
       <button (click)="unfollow(user)">Requested</button>
-      } @else if (user.es_amigo === 0) {
+      } @else if (user.es_amigo == 0) {
       <button (click)="follow(user)">Follow</button>
       } @else {
       <button (click)="unfollow(user)">Unfollow</button>
@@ -31,8 +31,19 @@
     </div>
   </div>
 </nav>
-} @if (publicaciones) {
 
-<app-gallery [publicaciones]="publicaciones" [session]="false"></app-gallery>
+} @if (user) { @if (user.es_amigo == 1 || user.id_estadou==0) { @if
+(publicaciones) {
+<app-gallery
+  [publicaciones]="publicaciones"
+  [session]="false"
+  [dni]="user"
+></app-gallery>
+} }@else {
+<div class="private">
+  <i class="fa-solid fa-lock fa-2xl"></i>
+  <h2>This profile is private</h2>
+  <p>Send a friend request to access this user's content.</p>
+</div>
+} }
 <div #scrollAnchor></div>
-}

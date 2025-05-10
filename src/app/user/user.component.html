@@ -5,7 +5,7 @@
     <div class="flex">
       <h3>{{ user.username }}</h3>
       <div class="margin">
-        @if ( user.id_estadoU === 1 ) {
+        @if ( user. id_estadou === 1 ) {
         <button (click)="showPet()">Show petitions</button>
         }
         <button (click)="logout()">Log out</button>
@@ -17,10 +17,10 @@
       <li>
         Photos: <b>{{ user.fotos }}</b>
       </li>
-      <li>
+      <li (click)="showFriends()">
         Friends: <b>{{ user.amigos }}</b>
       </li>
-      @if (user.id_estadoU === 0) {
+      @if (user. id_estadou === 0) {
       <li>User: <b>Public</b></li>
       } @else {
       <li>User: <b>Private</b></li>
@@ -32,9 +32,20 @@
     </div>
   </div>
 </nav>
+
 } @if (publicaciones) {
-<app-gallery [publicaciones]="publicaciones" [session]="true"></app-gallery>
+<app-gallery
+  [publicaciones]="publicaciones"
+  [session]="true"
+  [dni]="user"
+></app-gallery>
 <div #scrollAnchor></div>
+<div class="delete-container">
+  <div class="delete" (click)="deleteUser()">
+    <i class="fa-solid fa-user-slash"></i>
+    <p>Borrar</p>
+  </div>
+</div>
 } @if (user) {
 <dialog #editProfileDialog (click)="closeOnOutsideClick($event)">
   <form
@@ -157,7 +168,7 @@
     <input
       type="text"
       placeholder="Search a user"
-      [(ngModel)]="userPetition"
+      [(ngModel)]="usernameFilter"
       (input)="filter()"
     />
     <label>
@@ -177,6 +188,36 @@
       <div class="button">
         <button (click)="allow(u)">Accept</button>
         <button (click)="reject(u)">Reject</button>
+      </div>
+    </div>
+    }
+  </div>
+</dialog>
+} @if (amigos) {
+<dialog #showFriends (click)="closeOnOutsideClick($event)" class="petitions">
+  <div class="input-container">
+    <input
+      type="text"
+      placeholder="Search a user"
+      [(ngModel)]="usernameFilter"
+      (input)="filter()"
+    />
+    <label>
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </label>
+  </div>
+  <div class="user-container">
+    @for (u of amigosFiltered; track $index) {
+    <div class="user">
+      <div class="user-author" [routerLink]="['/user', u.username]">
+        <img [src]="u.foto_perfil || 'user.png'" alt="Autor" />
+      </div>
+      <p class="user-content" [routerLink]="['/user', u.username]">
+        <span class="author-name">{{ u.username }}</span>
+        {{ u.descp || "no description" }}
+      </p>
+      <div class="button">
+        <button (click)="unfollow(u)">Unfollow</button>
       </div>
     </div>
     }

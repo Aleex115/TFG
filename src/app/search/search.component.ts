@@ -45,10 +45,11 @@ export class SearchComponent {
     });
   }
   follow(u: any) {
-    if (u.es_amigo === 1) {
+    console.log(u.es_amigo);
+    if (u.es_amigo == 1) {
       return;
     }
-    if (u.id_estadoU === 0) {
+    if (u.id_estadou == 0) {
       console.log('Perfil publico');
       this.fS.follow(u.dni).subscribe({
         next: (res: any) => {
@@ -67,7 +68,7 @@ export class SearchComponent {
         },
       });
     }
-    if (u.id_estadoU === 1) {
+    if (u.id_estadou == 1) {
       console.log('Perfil publico');
       this.pS.request(u.dni).subscribe({
         next: (res: any) => {
@@ -104,12 +105,14 @@ export class SearchComponent {
         text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!',
+        confirmButtonText: 'Yes, unfollow it!',
         cancelButtonText: 'No, cancel!',
         reverseButtons: true,
       })
       .then((result) => {
         if (result.isConfirmed) {
+          this.reload();
+
           // Aquí puedes llamar al servicio para eliminar el elemento
           if (u.peticion == 1) {
             this.pS.cancelRequest(u.dni).subscribe({
@@ -159,7 +162,7 @@ export class SearchComponent {
       });
   }
   link(u: any) {
-    if (u.es_amigo === 1 || u.id_estadoU === 0) {
+    if (u.es_amigo == 1 || u.id_estadou == 0) {
       this.router.navigate(['/user', u.username]);
     } else {
       this.alert.showAlert(

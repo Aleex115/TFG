@@ -6,7 +6,8 @@ import { Injectable } from '@angular/core';
 })
 export class ComentarioService {
   constructor(private http: HttpClient) {}
-  url = 'http://localhost:3000/';
+  url = 'https://image-hub-five.vercel.app/';
+
   writeComment(id: string, com: string, dni: string = '') {
     let json = { dni, id, com };
     return this.http.post(this.url + 'comment', json, {

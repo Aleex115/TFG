@@ -7,7 +7,6 @@ import {
 } from '@angular/forms';
 import { CustomValidator } from '../CustomValidator';
 import { UsuarioService } from '../usuario.service';
-import Swal from 'sweetalert2';
 import { RouterLink } from '@angular/router';
 import { AlertService } from '../alert.service';
 

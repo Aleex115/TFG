@@ -118,7 +118,7 @@
             class="like"
             [id]="'heart2' + publication.id"
             hidden
-            [checked]="publication.hasLiked === 1"
+            [checked]="publication.hasLiked == true"
             (change)="
               like(publication.id, $event);
               triggerAnimation($event, publication.id)
@@ -144,7 +144,7 @@
 
     <div class="comment-container">
       @for (comment of comments; track $index) {
-      <div class="comment">
+      <div class="comment" (click)="link(comment)">
         <div class="comment-author">
           <img [src]="comment.foto_perfil" alt="Autor" />
         </div>

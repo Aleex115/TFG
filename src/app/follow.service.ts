@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class FollowService {
   constructor(private http: HttpClient) {}
-  url = 'http://localhost:3000/';
+  url = 'https://image-hub-five.vercel.app/';
 
   follow(dni: string = '') {
     let json = { dni }; // No es necesario convertirlo a string
@@ -17,6 +17,11 @@ export class FollowService {
   unfollow(dni: string = '') {
     let params = { dni };
     return this.http.delete(this.url + `unfollow?dni=${dni}`, {
+      withCredentials: true,
+    });
+  }
+  getAll() {
+    return this.http.get(this.url + 'allFriends', {
       withCredentials: true,
     });
   }

@@ -116,6 +116,7 @@
   height: 100px;
   align-items: center;
   justify-content: space-between;
+  gap: 10px;
   padding-left: 5%;
   padding-right: 5%;
 }

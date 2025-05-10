@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { UsuarioService } from '../usuario.service';
 import { PublicacionesService } from '../publicaciones.service';
 import { AlertService } from '../alert.service';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { GalleryComponent } from '../gallery/gallery.component';
 
 @Component({
@@ -14,19 +14,9 @@ import { GalleryComponent } from '../gallery/gallery.component';
 export class HomeComponent {
   @ViewChild('scrollAnchor') scrollAnchor!: ElementRef;
 
-  constructor(
-    private uS: UsuarioService,
-    private pS: PublicacionesService,
-    private ar: ActivatedRoute,
-    private alert: AlertService
-  ) {
-    ar.paramMap.subscribe(
-      (el: ParamMap) => (this.username = el.get('username'))
-    );
-  }
+  constructor(private pS: PublicacionesService, private alert: AlertService) {}
 
   user: any;
-  username: any;
   publication: any;
   formato = 'JPG';
   calidad = 80;

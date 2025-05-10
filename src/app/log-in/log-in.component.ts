@@ -5,9 +5,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { CustomValidator } from '../CustomValidator';
 import { UsuarioService } from '../usuario.service';
-import Swal from 'sweetalert2';
 import { ActivatedRoute, ParamMap, Router, RouterLink } from '@angular/router';
 import { AlertService } from '../alert.service';
 
