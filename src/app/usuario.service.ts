@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class UsuarioService {
   constructor(private http: HttpClient) {}
-  url = 'https://94f1-85-56-123-170.ngrok-free.app/';
+  url = 'https://3068-85-56-123-170.ngrok-free.app/';
   login(username: string, pwd: string) {
     let fd = new FormData();
     fd.append('username', username.trim());

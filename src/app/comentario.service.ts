@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class ComentarioService {
   constructor(private http: HttpClient) {}
-  url = 'https://94f1-85-56-123-170.ngrok-free.app/';
+  url = 'https://3068-85-56-123-170.ngrok-free.app/';
 
   writeComment(id: string, com: string, dni: string = '') {
     let json = { dni, id, com };
