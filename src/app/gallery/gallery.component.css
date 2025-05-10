@@ -502,6 +502,7 @@ dialog .dropdown-content {
     height: auto;
     max-width: 90%;
     max-height: 80%;
+    height: fit-content !important;
   }
 
   .modal>img {
