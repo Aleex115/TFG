@@ -6,7 +6,7 @@ import { EnvironmentInjector, Injectable } from '@angular/core';
 })
 export class PublicacionesService {
   constructor(private http: HttpClient) {}
-  url = 'https://6835-85-56-123-170.ngrok-free.app/';
+  url = 'https://94f1-85-56-123-170.ngrok-free.app/';
 
   upload(fd: FormData) {
     return this.http.post(this.url + 'upload', fd, { withCredentials: true });
