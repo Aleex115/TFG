@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class FollowService {
   constructor(private http: HttpClient) {}
-  url = 'https://image-hub-five.vercel.app/';
+  url = 'https://back-end-tfg-post-gre.vercel.app/';
 
   follow(dni: string = '') {
     let json = { dni }; // No es necesario convertirlo a string

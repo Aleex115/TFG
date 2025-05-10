@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class UsuarioService {
   constructor(private http: HttpClient) {}
-  url = 'https://image-hub-five.vercel.app/';
+  url = 'https://back-end-tfg-post-gre.vercel.app/';
   login(username: string, pwd: string) {
     let fd = new FormData();
     fd.append('username', username.trim());

@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class PetitionService {
   constructor(private http: HttpClient) {}
-  url = 'https://image-hub-five.vercel.app/';
+  url = 'https://back-end-tfg-post-gre.vercel.app/';
 
   request(dni: string = '') {
     let json = { dni };
