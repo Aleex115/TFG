@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class FollowService {
   constructor(private http: HttpClient) {}
-  url = 'https://1d75-85-56-123-170.ngrok-free.app/';
+  url = 'https://6835-85-56-123-170.ngrok-free.app/';
 
   follow(dni: string = '') {
     let json = { dni }; // No es necesario convertirlo a string
