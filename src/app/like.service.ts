@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class LikeService {
   constructor(private http: HttpClient) {}
-  url = 'https://3068-85-56-123-170.ngrok-free.app/';
+  url = 'https://f24d-85-56-123-170.ngrok-free.app/';
 
   giveLike(id: string, dni: string = '') {
     let json = { dni, id }; // No es necesario convertirlo a string

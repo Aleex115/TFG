@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class PetitionService {
   constructor(private http: HttpClient) {}
-  url = 'https://3068-85-56-123-170.ngrok-free.app/';
+  url = 'https://f24d-85-56-123-170.ngrok-free.app/';
 
   request(dni: string = '') {
     let json = { dni };
