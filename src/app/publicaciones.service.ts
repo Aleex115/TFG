@@ -6,7 +6,7 @@ import { EnvironmentInjector, Injectable } from '@angular/core';
 })
 export class PublicacionesService {
   constructor(private http: HttpClient) {}
-  url = 'https://back-end-tfg-post-gre.vercel.app/';
+  url = 'https://1d75-85-56-123-170.ngrok-free.app/';
 
   upload(fd: FormData) {
     return this.http.post(this.url + 'upload', fd, { withCredentials: true });

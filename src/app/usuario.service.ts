@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class UsuarioService {
   constructor(private http: HttpClient) {}
-  url = 'https://back-end-tfg-post-gre.vercel.app/';
+  url = 'https://1d75-85-56-123-170.ngrok-free.app/';
   login(username: string, pwd: string) {
     let fd = new FormData();
     fd.append('username', username.trim());

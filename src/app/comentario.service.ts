@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class ComentarioService {
   constructor(private http: HttpClient) {}
-  url = 'https://back-end-tfg-post-gre.vercel.app/';
+  url = 'https://1d75-85-56-123-170.ngrok-free.app/';
 
   writeComment(id: string, com: string, dni: string = '') {
     let json = { dni, id, com };
