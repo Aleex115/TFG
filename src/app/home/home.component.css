@@ -36,3 +36,28 @@
   margin: 0;
   color: #B9B8B5;
 }
+
+.one {
+  background-image: url('../../../public/1.jpg');
+
+}
+
+.two {
+  background-image: url('../../../public/2.jpg');
+  background-position: center;
+}
+
+@media screen and (max-width: 800px) {
+  .image {
+    height: 100vh;
+  }
+
+  .one {
+    background-image: url('../../../public/3.jpg');
+
+  }
+
+  .two {
+    background-image: url('../../../public/4.jpg');
+  }
+}
