@@ -48,7 +48,7 @@
 
 <dialog class="modal" #download (click)="closeOnOutsideClick($event)">
   @if (publication) {
-  <img [src]="publication.foto" alt="" />
+  <img [src]="publication.foto" [alt]="publication.title" />
   <div>
     <h3>{{ publication.title }}</h3>
     <p>
