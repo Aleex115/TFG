@@ -22,4 +22,17 @@ export class AlertService {
       backdrop: '#000c',
     });
   }
+  showMessageExpired() {
+    Swal.fire({
+      title: 'Expired session',
+      text: 'Please log in again.',
+      icon: 'warning',
+      confirmButtonText: 'Accept',
+      customClass: {
+        confirmButton: 'swal-custom-button',
+      },
+      theme: 'dark',
+      backdrop: '#000c',
+    });
+  }
 }

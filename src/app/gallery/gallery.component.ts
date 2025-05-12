@@ -51,13 +51,15 @@ export class GalleryComponent {
         },
         error: (err) => {
           console.log(err);
-          this.alert.showAlert(
-            'error',
-            err.error.title,
-            err.error.message || 'An unexpected error occurred'
-          );
           if (err.status === 401) {
+            this.alert.showMessageExpired();
             this.router.navigate(['/login']);
+          } else {
+            this.alert.showAlert(
+              'error',
+              err.error.title,
+              err.error.message || 'An unexpected error occurred'
+            );
           }
         },
       });
@@ -122,11 +124,20 @@ export class GalleryComponent {
               }
             },
             error: (err) => {
-              swalWithBootstrapButtons.fire(
-                err.error.title,
-                err.error.message || 'An unexpected error occurred',
-                'error'
-              );
+              if (err.status === 401) {
+                swalWithBootstrapButtons.fire(
+                  'Expired session',
+                  'Please log in again.',
+                  'warning'
+                );
+                this.router.navigate(['/login']);
+              } else {
+                swalWithBootstrapButtons.fire(
+                  err.error.title,
+                  err.error.message || 'An unexpected error occurred',
+                  'error'
+                );
+              }
             },
           });
         } else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -151,14 +162,15 @@ export class GalleryComponent {
           this.alert.showAlert('success', 'OK', 'Comment posted successfully');
         },
         error: (err) => {
-          console.log(err);
-          this.alert.showAlert(
-            'error',
-            err.error.title,
-            err.error.message || 'An unexpected error occurred'
-          );
           if (err.status === 401) {
+            this.alert.showMessageExpired();
             this.router.navigate(['/login']);
+          } else {
+            this.alert.showAlert(
+              'error',
+              err.error.title,
+              err.error.message || 'An unexpected error occurred'
+            );
           }
         },
       });
@@ -166,8 +178,6 @@ export class GalleryComponent {
   }
 
   savePublication(publi: any) {
-    console.log(this.dni);
-    console.log(publi);
     this.publication = publi;
     this.cS.getAllComment(publi.id).subscribe({
       next: (res: any) => {
@@ -176,14 +186,15 @@ export class GalleryComponent {
       },
       error: (err) => {
         Swal.close();
-        console.log(err);
-        this.alert.showAlert(
-          'error',
-          err.error.title,
-          err.error.message || 'An unexpected error occurred'
-        );
         if (err.status === 401) {
+          this.alert.showMessageExpired();
           this.router.navigate(['/login']);
+        } else {
+          this.alert.showAlert(
+            'error',
+            err.error.title,
+            err.error.message || 'An unexpected error occurred'
+          );
         }
       },
     });
@@ -194,14 +205,15 @@ export class GalleryComponent {
       },
       error: (err) => {
         Swal.close();
-        console.log(err);
-        this.alert.showAlert(
-          'error',
-          err.error.title,
-          err.error.message || 'An unexpected error occurred'
-        );
         if (err.status === 401) {
+          this.alert.showMessageExpired();
           this.router.navigate(['/login']);
+        } else {
+          this.alert.showAlert(
+            'error',
+            err.error.title,
+            err.error.message || 'An unexpected error occurred'
+          );
         }
       },
     });
@@ -265,14 +277,15 @@ export class GalleryComponent {
           },
           error: (err) => {
             Swal.close();
-            console.log(err);
-            this.alert.showAlert(
-              'error',
-              err.error.title,
-              err.error.message || 'An unexpected error occurred'
-            );
             if (err.status === 401) {
+              this.alert.showMessageExpired();
               this.router.navigate(['/login']);
+            } else {
+              this.alert.showAlert(
+                'error',
+                err.error.title,
+                err.error.message || 'An unexpected error occurred'
+              );
             }
           },
         });
