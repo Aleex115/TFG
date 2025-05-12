@@ -462,6 +462,7 @@ dialog .dropdown-content {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 10px;
   background-color: #fff;
+  cursor: pointer;
 }
 
 .comment-author img {
