@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { CustomValidator } from '../CustomValidator';
 import { UsuarioService } from '../usuario.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AlertService } from '../alert.service';
 
 @Component({
@@ -17,7 +17,11 @@ import { AlertService } from '../alert.service';
   styleUrl: './sign-in.component.css',
 })
 export class SignInComponent {
-  constructor(private uS: UsuarioService, private alert: AlertService) {}
+  constructor(
+    private uS: UsuarioService,
+    private alert: AlertService,
+    private router: Router
+  ) {}
 
   form = new FormGroup({
     dni: new FormControl('', [Validators.required, CustomValidator.dni]),
@@ -39,6 +43,7 @@ export class SignInComponent {
       )
       .subscribe({
         next: (res) => {
+          this.router.navigate(['/login']);
           this.alert.showAlert(
             'success',
             'Successful signin',
