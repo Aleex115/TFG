@@ -143,7 +143,8 @@
 
 .hover label:hover,
 .modal .likes label:hover,
-.modal .input-container label:hover {
+.modal .input-container label:hover,
+.comment:hover {
   transform: translateY(-2px);
 }
 
@@ -330,10 +331,10 @@ dialog form {
   max-width: 70%;
   height: 100%;
   object-fit: cover;
+
 }
 
 .modal>div {
-  min-width: 400px;
   padding: 20px 20px;
   margin: 10px auto;
 }
@@ -352,7 +353,7 @@ dialog form {
   display: flex;
   justify-content: space-between;
   gap: 10px;
-  padding-right: 12px;
+
 }
 
 .dropdown-menu {
@@ -360,7 +361,7 @@ dialog form {
   position: relative;
   display: inline-block;
   margin: 0 0 20px;
-  padding-right: 12px;
+
 }
 
 .dropdown-toggle {
@@ -430,7 +431,7 @@ dialog .dropdown-content {
   overflow-y: auto;
   max-height: 58%;
   margin-top: 20px;
-  padding-right: 12px;
+
 }
 
 /* Estilos personalizados para el scroll */
@@ -463,6 +464,7 @@ dialog .dropdown-content {
   padding: 10px;
   background-color: #fff;
   cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
 .comment-author img {
@@ -482,6 +484,13 @@ dialog .dropdown-content {
 .comment-content .author-name {
   font-weight: bold;
   margin-right: 5px;
+}
+
+.flex .comment {
+  color: #D4AF37;
+  border: none;
+  padding: 5px;
+  margin: 0;
 }
 
 .likes {
@@ -516,17 +525,11 @@ dialog .dropdown-content {
     padding: 10px;
   }
 
-  .modal .button-container {
-    padding-right: 24px;
-  }
+  .modal .button-container {}
 
-  .dropdown-menu {
-    padding-right: 24px;
-  }
+  .dropdown-menu {}
 
-  .comment-container {
-    padding-right: 24px;
-  }
+  .comment-container {}
 
 
 }

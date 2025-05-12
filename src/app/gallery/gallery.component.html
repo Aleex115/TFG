@@ -50,7 +50,18 @@
   @if (publication) {
   <img [src]="publication.foto" [alt]="publication.title" />
   <div>
-    <h3>{{ publication.title }}</h3>
+    <div class="flex">
+      <h3>{{ publication.title }}</h3>
+      <div class="comment" (click)="link(comment)">
+        <div class="comment-author">
+          <img [src]="dni.foto_perfil" alt="Autor" />
+        </div>
+        <p class="comment-content">
+          <span class="author-name">{{ dni.username }}</span>
+        </p>
+      </div>
+    </div>
+
     <p>
       {{ publication.descp }}
     </p>
