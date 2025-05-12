@@ -25,7 +25,8 @@ export class OtherUserComponent implements AfterViewInit {
     private ar: ActivatedRoute,
     private fS: FollowService,
     private ptS: PetitionService,
-    private alert: AlertService
+    private alert: AlertService,
+    private router: Router
   ) {
     ar.paramMap.subscribe(
       (el: ParamMap) => (this.username = el.get('username'))
@@ -51,10 +52,20 @@ export class OtherUserComponent implements AfterViewInit {
   loading = false;
 
   ngOnInit() {
-    this.uS.getOne(this.username).subscribe((res: any) => {
-      this.user = res.user;
-      console.log(this.user);
-      this.fotoUrl = res.user.foto_perfil || 'user.png';
+    this.uS.getOne(this.username).subscribe({
+      next: (res: any) => {
+        this.user = res.user;
+        console.log(this.user);
+        this.fotoUrl = res.user.foto_perfil || 'user.png';
+      },
+      error: (err) => {
+        this.alert.showAlert(
+          'error',
+          err.error.title,
+          'That user does not exists'
+        );
+        this.router.navigate(['/search']);
+      },
     });
     this.getPublicaciones();
 
