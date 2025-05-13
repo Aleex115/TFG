@@ -5,7 +5,7 @@
     <div class="flex">
       <h3>{{ user.username }}</h3>
       <div class="margin">
-        @if ( user. id_estadou === 1 ) {
+        @if ( user. id_estadou === 1 && petitions.length !== 0) {
         <button (click)="showPet()">Show petitions</button>
         }
         <button (click)="logout()">Log out</button>
@@ -43,7 +43,7 @@
 <div class="delete-container">
   <div class="delete" (click)="deleteUser()">
     <i class="fa-solid fa-user-slash"></i>
-    <p>Borrar</p>
+    <p>Delete Profile</p>
   </div>
 </div>
 } @if (user) {
