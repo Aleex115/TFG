@@ -345,6 +345,7 @@ export class UserComponent implements AfterViewInit {
     this.close();
     if (u.es_amigo === 1 || u.id_estadou === 0) {
       this.router.navigate(['/user', u.username]);
+    } else if (this.user.username === u.username) {
     } else {
       this.alert.showAlert(
         'error',

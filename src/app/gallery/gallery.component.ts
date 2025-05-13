@@ -309,8 +309,13 @@ export class GalleryComponent {
   link(u: any) {
     this.download.nativeElement.close();
 
-    if (u.es_amigo == 1 || u.id_estadou == 0 || this.dni.dni == u.dni) {
+    if (u.es_amigo == 1 || u.id_estadou == 0) {
       this.router.navigate(['/user', u.username]);
+      setTimeout(() => {
+        window.location.reload();
+      }, 100);
+    } else if (this.dni.dni == u.dni) {
+      this.router.navigate(['/user']);
       setTimeout(() => {
         window.location.reload();
       }, 100);
