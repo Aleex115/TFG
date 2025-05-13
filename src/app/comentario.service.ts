@@ -12,7 +12,6 @@ export class ComentarioService {
     id: string,
     com: string,
     dniPublication: string,
-
     dni: string = ''
   ) {
     let json = { dni, id, com, dniPublication };

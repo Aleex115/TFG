@@ -35,13 +35,14 @@ export class PublicacionesService {
     url: string,
     format: string,
     quality: number,
-    dniPublication: string
+    dniPublication: string,
+    id_publi: string
   ) {
     return this.http.get(
       this.url +
         `download?url=${encodeURIComponent(
           url
-        )}&format=${format}&quality=${quality}&dniPublication=${dniPublication}`,
+        )}&format=${format}&quality=${quality}&dniPublication=${dniPublication}&id_publi=${id_publi}`,
       {
         withCredentials: true,
         responseType: 'blob',

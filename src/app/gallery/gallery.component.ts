@@ -159,25 +159,25 @@ export class GalleryComponent {
       this.alert.showAlert('error', 'Error', "You can't send an empty comment");
     } else {
       this.download.nativeElement.close();
-
-      this.cS.writeComment(id, this.comentario, persona_dni).subscribe({
-        next: (res: any) => {
-          this.alert.showAlert('success', 'OK', 'Comment posted successfully');
-        },
-        error: (err) => {
-          Swal.close();
-          if (err.status == 401) {
-            this.alert.showMessageExpired();
-            this.router.navigate(['/login']);
-          } else {
-            this.alert.showAlert(
-              'error',
-              err.error.title,
-              err.error.message || 'An unexpected error occurred'
-            );
-          }
-        },
-      });
+      console.log(persona_dni);
+      // this.cS.writeComment(id, this.comentario, persona_dni).subscribe({
+      //   next: (res: any) => {
+      //     this.alert.showAlert('success', 'OK', 'Comment posted successfully');
+      //   },
+      //   error: (err) => {
+      //     Swal.close();
+      //     if (err.status == 401) {
+      //       this.alert.showMessageExpired();
+      //       this.router.navigate(['/login']);
+      //     } else {
+      //       this.alert.showAlert(
+      //         'error',
+      //         err.error.title,
+      //         err.error.message || 'An unexpected error occurred'
+      //       );
+      //     }
+      //   },
+      // });
     }
   }
 
@@ -268,7 +268,8 @@ export class GalleryComponent {
           this.publication.foto,
           this.formato,
           this.calidad,
-          this.publication.persona_dni
+          this.publication.persona_dni,
+          this.publication.id
         )
         .subscribe({
           next: (res: any) => {

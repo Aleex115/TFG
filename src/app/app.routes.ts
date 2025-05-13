@@ -8,6 +8,7 @@ import { UserComponent } from './user/user.component';
 import { UploadComponent } from './user/upload/upload.component';
 import { SearchComponent } from './search/search.component';
 import { OtherUserComponent } from './other-user/other-user.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 export const routes: Routes = [
   {
@@ -25,6 +26,11 @@ export const routes: Routes = [
   {
     path: 'search',
     component: SearchComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'notifications',
+    component: NotificationsComponent,
     canActivate: [AuthGuard],
   },
   {
