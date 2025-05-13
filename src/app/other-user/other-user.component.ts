@@ -35,9 +35,6 @@ export class OtherUserComponent implements AfterViewInit {
 
   user: any;
   username: any;
-  publication: any;
-  formato = 'JPG';
-  calidad = 80;
 
   fotoUrl = '';
 
@@ -57,6 +54,16 @@ export class OtherUserComponent implements AfterViewInit {
         this.user = res.user;
         console.log(this.user);
         this.fotoUrl = res.user.foto_perfil || 'user.png';
+        if (this.user.es_amigo == 1 || this.user.id_estadou == 0) {
+          console.log('prueba');
+          this.getPublicaciones();
+          //Por si las imágenes no tienen el suficiente tamaño para generar el scroll
+          setTimeout(() => {
+            if (window.innerHeight <= document.body.offsetHeight) {
+              this.getPublicaciones();
+            }
+          }, 300);
+        }
       },
       error: (err) => {
         this.alert.showAlert(
@@ -67,14 +74,7 @@ export class OtherUserComponent implements AfterViewInit {
         this.router.navigate(['/search']);
       },
     });
-    this.getPublicaciones();
-
-    //Por si las imágenes no tienen el suficiente tamaño para generar el scroll
-    setTimeout(() => {
-      if (window.innerHeight <= document.body.offsetHeight) {
-        this.getPublicaciones();
-      }
-    }, 300);
+    console.log(this.user);
   }
 
   getPublicaciones() {
@@ -111,7 +111,11 @@ export class OtherUserComponent implements AfterViewInit {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && !this.loading) {
-          this.getPublicaciones();
+          if (this.user) {
+            if (this.user.es_amigo == 1 || this.user.id_estadou == 0) {
+              this.getPublicaciones();
+            }
+          }
         }
       },
       { threshold: 0.1, rootMargin: '300px' }
