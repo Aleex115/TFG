@@ -31,12 +31,17 @@ export class PublicacionesService {
       withCredentials: true,
     });
   }
-  download(url: string, format: string, quality: number) {
+  download(
+    url: string,
+    format: string,
+    quality: number,
+    dniPublication: string
+  ) {
     return this.http.get(
       this.url +
         `download?url=${encodeURIComponent(
           url
-        )}&format=${format}&quality=${quality}`,
+        )}&format=${format}&quality=${quality}&dniPublication=${dniPublication}`,
       {
         withCredentials: true,
         responseType: 'blob',

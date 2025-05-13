@@ -42,18 +42,18 @@ export class GalleryComponent {
     });
   }
 
-  like(id: string, e: Event) {
+  like(id: string, persona_dni: string, e: Event) {
     let checkbox = e.target as HTMLInputElement;
     if (checkbox.checked) {
-      this.lS.giveLike(id).subscribe({
+      this.lS.giveLike(id, persona_dni).subscribe({
         next: (res: any) => {
-          let p = this.publicaciones.find((el) => el.id === id);
+          let p = this.publicaciones.find((el) => el.id == id);
           p.hasLiked = 1;
 
           this.likes++;
         },
         error: (err) => {
-          if (err.status === 401) {
+          if (err.status == 401) {
             this.alert.showMessageExpired();
             this.router.navigate(['/login']);
           } else {
@@ -66,9 +66,9 @@ export class GalleryComponent {
         },
       });
     } else {
-      this.lS.deleteLike(id).subscribe({
+      this.lS.deleteLike(id, persona_dni).subscribe({
         next: (res: any) => {
-          let p = this.publicaciones.find((el) => el.id === id);
+          let p = this.publicaciones.find((el) => el.id == id);
 
           p.hasLiked = 0;
 
@@ -76,7 +76,7 @@ export class GalleryComponent {
         },
         error: (err) => {
           Swal.close();
-          if (err.status === 401) {
+          if (err.status == 401) {
             this.alert.showMessageExpired();
             this.router.navigate(['/login']);
           } else {
@@ -116,7 +116,7 @@ export class GalleryComponent {
         if (result.isConfirmed) {
           this.pS.deletePubli(id, public_id).subscribe({
             next: (res: any) => {
-              if (res.status === 200) {
+              if (res.status == 200) {
                 this.publicaciones = this.publicaciones.filter(
                   (el) => el.id !== id
                 );
@@ -128,7 +128,7 @@ export class GalleryComponent {
               }
             },
             error: (err) => {
-              if (err.status === 401) {
+              if (err.status == 401) {
                 swalWithBootstrapButtons.fire(
                   'Expired session',
                   'Please log in again.',
@@ -144,7 +144,7 @@ export class GalleryComponent {
               }
             },
           });
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
+        } else if (result.dismiss == Swal.DismissReason.cancel) {
           swalWithBootstrapButtons.fire(
             'Cancelled',
             'Your photo is safe',
@@ -154,19 +154,19 @@ export class GalleryComponent {
       });
   }
 
-  comment(id: string) {
+  comment(id: string, persona_dni: string) {
     if (!this.comentario) {
       this.alert.showAlert('error', 'Error', "You can't send an empty comment");
     } else {
       this.download.nativeElement.close();
 
-      this.cS.writeComment(id, this.comentario).subscribe({
+      this.cS.writeComment(id, this.comentario, persona_dni).subscribe({
         next: (res: any) => {
           this.alert.showAlert('success', 'OK', 'Comment posted successfully');
         },
         error: (err) => {
           Swal.close();
-          if (err.status === 401) {
+          if (err.status == 401) {
             this.alert.showMessageExpired();
             this.router.navigate(['/login']);
           } else {
@@ -190,7 +190,7 @@ export class GalleryComponent {
       },
       error: (err) => {
         Swal.close();
-        if (err.status === 401) {
+        if (err.status == 401) {
           this.alert.showMessageExpired();
           this.router.navigate(['/login']);
         } else {
@@ -208,7 +208,7 @@ export class GalleryComponent {
       },
       error: (err) => {
         Swal.close();
-        if (err.status === 401) {
+        if (err.status == 401) {
           this.alert.showMessageExpired();
           this.router.navigate(['/login']);
         } else {
@@ -230,7 +230,7 @@ export class GalleryComponent {
     let dialogos = [this.download];
     dialogos.forEach((el) => {
       const dialogElement = el.nativeElement as HTMLDialogElement;
-      if (event.target === dialogElement) {
+      if (event.target == dialogElement) {
         dialogElement.close();
       }
     });
@@ -264,7 +264,12 @@ export class GalleryComponent {
     });
     try {
       this.pS
-        .download(this.publication.foto, this.formato, this.calidad)
+        .download(
+          this.publication.foto,
+          this.formato,
+          this.calidad,
+          this.publication.persona_dni
+        )
         .subscribe({
           next: (res: any) => {
             Swal.close();
@@ -279,7 +284,7 @@ export class GalleryComponent {
           },
           error: (err) => {
             Swal.close();
-            if (err.status === 401) {
+            if (err.status == 401) {
               this.alert.showMessageExpired();
               this.router.navigate(['/login']);
             } else {

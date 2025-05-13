@@ -8,8 +8,14 @@ export class ComentarioService {
   constructor(private http: HttpClient) {}
   url = 'https://imagehub-y2nt.onrender.com/';
 
-  writeComment(id: string, com: string, dni: string = '') {
-    let json = { dni, id, com };
+  writeComment(
+    id: string,
+    com: string,
+    dniPublication: string,
+
+    dni: string = ''
+  ) {
+    let json = { dni, id, com, dniPublication };
     return this.http.post(this.url + 'comment', json, {
       withCredentials: true,
     });

@@ -8,14 +8,14 @@ export class LikeService {
   constructor(private http: HttpClient) {}
   url = 'https://imagehub-y2nt.onrender.com/';
 
-  giveLike(id: string, dni: string = '') {
-    let json = { dni, id }; // No es necesario convertirlo a string
+  giveLike(id: string, dniPublication: string, dni: string = '') {
+    let json = { dni, id, dniPublication }; // No es necesario convertirlo a string
     return this.http.post(this.url + 'giveLike', json, {
       withCredentials: true,
     });
   }
-  deleteLike(id: string, dni: string = '') {
-    let params = { dni, id };
+  deleteLike(id: string, dniPublication: string, dni: string = '') {
+    let params = { dni, id, dniPublication };
     return this.http.delete(this.url + 'deleteLike', {
       params,
       withCredentials: true,

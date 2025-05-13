@@ -19,7 +19,8 @@
             [id]="'heart' + publi.id"
             hidden
             (change)="
-              like(publi.id, $event); triggerAnimation($event, publi.id)
+              like(publi.id, publication.persona_dni, $event);
+              triggerAnimation($event, publi.id)
             "
             [checked]="publi.hasLiked == 1"
           />
@@ -36,7 +37,7 @@
             placeholder="Write a comment"
             [(ngModel)]="comentario"
           />
-          <label (click)="comment(publi.id)">
+          <label (click)="comment(publi.id, publication.persona_dni)">
             <i class="fa-solid fa-paper-plane"></i>
           </label>
         </div>
@@ -135,7 +136,7 @@
             hidden
             [checked]="publication.hasLiked == true"
             (change)="
-              like(publication.id, $event);
+              like(publication.id, publication.persona_dni, $event);
               triggerAnimation($event, publication.id)
             "
           />
@@ -151,7 +152,7 @@
           placeholder="Write a comment"
           [(ngModel)]="comentario"
         />
-        <label (click)="comment(publication.id)">
+        <label (click)="comment(publication.id, publication.persona_dni)">
           <i class="fa-solid fa-paper-plane"></i>
         </label>
       </div>
