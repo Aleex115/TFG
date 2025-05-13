@@ -6,6 +6,7 @@ import { AlertService } from '../alert.service';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UsuarioService } from '../usuario.service';
 
 @Component({
   selector: 'app-gallery',
@@ -16,11 +17,11 @@ import { Router } from '@angular/router';
 export class GalleryComponent {
   @Input() publicaciones: any[] = [];
   @Input() session = false;
-  @Input() dni: any;
 
   @ViewChild('download') download!: ElementRef;
   @ViewChild('dropdown-menu') dropdownMenu!: ElementRef;
 
+  user: any;
   comentario = '';
   likes: number = 0;
   publication: any;
@@ -28,29 +29,30 @@ export class GalleryComponent {
   dropdownOpen = false;
   formato = 'JPG';
   calidad = 80;
-
   constructor(
     private pS: PublicacionesService,
     private lS: LikeService,
     private cS: ComentarioService,
+    private uS: UsuarioService,
     private alert: AlertService,
     private router: Router
-  ) {}
+  ) {
+    this.uS.getOne().subscribe((res: any) => {
+      this.user = res.user;
+    });
+  }
 
   like(id: string, e: Event) {
     let checkbox = e.target as HTMLInputElement;
     if (checkbox.checked) {
       this.lS.giveLike(id).subscribe({
         next: (res: any) => {
-          console.log(res);
           let p = this.publicaciones.find((el) => el.id === id);
           p.hasLiked = 1;
-          console.log(this.publicaciones.find((el) => el.id === id));
 
           this.likes++;
         },
         error: (err) => {
-          console.log(err);
           if (err.status === 401) {
             this.alert.showMessageExpired();
             this.router.navigate(['/login']);
@@ -69,13 +71,10 @@ export class GalleryComponent {
           let p = this.publicaciones.find((el) => el.id === id);
 
           p.hasLiked = 0;
-          console.log(this.publicaciones.find((el) => el.id === id));
 
-          console.log(res);
           this.likes--;
         },
         error: (err) => {
-          console.log(err);
           this.alert.showAlert(
             'error',
             err.error.title,
@@ -111,7 +110,6 @@ export class GalleryComponent {
         if (result.isConfirmed) {
           this.pS.deletePubli(id, public_id).subscribe({
             next: (res: any) => {
-              console.log(res);
               if (res.status === 200) {
                 this.publicaciones = this.publicaciones.filter(
                   (el) => el.id !== id
@@ -158,7 +156,6 @@ export class GalleryComponent {
 
       this.cS.writeComment(id, this.comentario).subscribe({
         next: (res: any) => {
-          console.log(res);
           this.alert.showAlert('success', 'OK', 'Comment posted successfully');
         },
         error: (err) => {
@@ -178,10 +175,10 @@ export class GalleryComponent {
   }
 
   savePublication(publi: any) {
+    console.log(publi);
     this.publication = publi;
     this.cS.getAllComment(publi.id).subscribe({
       next: (res: any) => {
-        console.log(res);
         this.comments = res.comments;
       },
       error: (err) => {
@@ -200,7 +197,6 @@ export class GalleryComponent {
     });
     this.lS.getAll(publi.id).subscribe({
       next: (res: any) => {
-        console.log(res);
         this.likes = res.total;
       },
       error: (err) => {
@@ -264,7 +260,6 @@ export class GalleryComponent {
         .download(this.publication.foto, this.formato, this.calidad)
         .subscribe({
           next: (res: any) => {
-            console.log(res);
             Swal.close();
             const a = document.createElement('a');
             a.href = URL.createObjectURL(res);
@@ -307,24 +302,20 @@ export class GalleryComponent {
     }
   }
   link(u: any) {
+    console.log(u);
+    console.log(this.user);
     this.download.nativeElement.close();
 
-    if (u.es_amigo == 1 || u.id_estadou == 0) {
-      this.router.navigate(['/user', u.username]);
-      setTimeout(() => {
-        window.location.reload();
-      }, 100);
-    } else if (this.dni.dni == u.dni) {
+    if (this.user.dni == u.persona_dni || this.user.username == u.username) {
       this.router.navigate(['/user']);
       setTimeout(() => {
         window.location.reload();
       }, 100);
     } else {
-      this.alert.showAlert(
-        'error',
-        'The profile is private ',
-        'You need to follow him'
-      );
+      this.router.navigate(['/user', u.username]);
+      setTimeout(() => {
+        window.location.reload();
+      }, 100);
     }
   }
 }

@@ -34,11 +34,7 @@
 
 } @if (user) { @if (user.es_amigo == 1 || user.id_estadou==0) { @if
 (publicaciones) {
-<app-gallery
-  [publicaciones]="publicaciones"
-  [session]="false"
-  [dni]="user"
-></app-gallery>
+<app-gallery [publicaciones]="publicaciones" [session]="false"></app-gallery>
 } }@else {
 <div class="private">
   <i class="fa-solid fa-lock fa-2xl"></i>

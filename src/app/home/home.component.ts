@@ -16,15 +16,6 @@ export class HomeComponent {
 
   constructor(private pS: PublicacionesService, private alert: AlertService) {}
 
-  user: any;
-  publication: any;
-  formato = 'JPG';
-  calidad = 80;
-
-  fotoUrl = '';
-
-  previewUrl: any;
-
   publicaciones: any[] = [];
 
   total = 0;
@@ -45,7 +36,6 @@ export class HomeComponent {
   }
 
   getPublicaciones() {
-    console.log(this.offset);
     if (this.offset <= this.total && !this.loading) {
       this.loading = true;
 
