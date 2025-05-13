@@ -19,7 +19,7 @@
             [id]="'heart' + publi.id"
             hidden
             (change)="
-              like(publi.id, publication.persona_dni, $event);
+              like(publi.id, publi.persona_dni, $event);
               triggerAnimation($event, publi.id)
             "
             [checked]="publi.hasLiked == 1"
