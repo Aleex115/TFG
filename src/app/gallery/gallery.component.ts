@@ -160,24 +160,24 @@ export class GalleryComponent {
     } else {
       this.download.nativeElement.close();
       console.log(persona_dni);
-      // this.cS.writeComment(id, this.comentario, persona_dni).subscribe({
-      //   next: (res: any) => {
-      //     this.alert.showAlert('success', 'OK', 'Comment posted successfully');
-      //   },
-      //   error: (err) => {
-      //     Swal.close();
-      //     if (err.status == 401) {
-      //       this.alert.showMessageExpired();
-      //       this.router.navigate(['/login']);
-      //     } else {
-      //       this.alert.showAlert(
-      //         'error',
-      //         err.error.title,
-      //         err.error.message || 'An unexpected error occurred'
-      //       );
-      //     }
-      //   },
-      // });
+      this.cS.writeComment(id, this.comentario, persona_dni).subscribe({
+        next: (res: any) => {
+          this.alert.showAlert('success', 'OK', 'Comment posted successfully');
+        },
+        error: (err) => {
+          Swal.close();
+          if (err.status == 401) {
+            this.alert.showMessageExpired();
+            this.router.navigate(['/login']);
+          } else {
+            this.alert.showAlert(
+              'error',
+              err.error.title,
+              err.error.message || 'An unexpected error occurred'
+            );
+          }
+        },
+      });
     }
   }
 
