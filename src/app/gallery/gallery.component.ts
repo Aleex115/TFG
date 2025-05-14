@@ -111,7 +111,7 @@ export class GalleryComponent {
     }
   }
 
-  delete(id: string, public_id: string) {
+  delete(id: string, url: string) {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn-accept',
@@ -134,7 +134,7 @@ export class GalleryComponent {
       })
       .then((result) => {
         if (result.isConfirmed) {
-          this.pS.deletePubli(id, public_id).subscribe({
+          this.pS.deletePubli(id, url).subscribe({
             next: (res: any) => {
               if (res.status == 200) {
                 this.publicaciones = this.publicaciones.filter(

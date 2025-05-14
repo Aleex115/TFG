@@ -28,8 +28,8 @@ export class PublicacionesService {
       }
     );
   }
-  deletePubli(id: string, public_id: string, dni: string = '') {
-    let params = { dni, id, public_id };
+  deletePubli(id: string, url: string, dni: string = '') {
+    let params = { dni, id, url };
     return this.http.delete(this.url + 'deletePubli', {
       params,
       withCredentials: true,

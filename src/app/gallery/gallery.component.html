@@ -4,7 +4,7 @@
     <img [src]="publi.foto" alt="" />
     <div class="hover" (mouseleave)="clear()">
       @if (session) {
-      <button class="delete" (click)="delete(publi.id, publi.public_id)">
+      <button class="delete" (click)="delete(publi.id, publi.foto)">
         <i class="fa-solid fa-trash"></i>
       </button>
       }
