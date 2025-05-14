@@ -37,6 +37,7 @@ export class OtherUserComponent implements AfterViewInit {
   username: any;
 
   fotoUrl = '';
+  filterPublicaciones = '';
 
   previewUrl: any;
 
@@ -82,24 +83,26 @@ export class OtherUserComponent implements AfterViewInit {
     if (this.offset <= this.total && !this.loading) {
       this.loading = true;
 
-      this.pS.getAllUser(this.offset, this.username).subscribe({
-        next: (res: any) => {
-          if (res && res.publicaciones) {
-            this.publicaciones.push(...res.publicaciones);
-            this.total = res.total;
-          }
-          this.loading = false;
-        },
-        error: (err) => {
-          console.log(err);
-          this.alert.showAlert(
-            'error',
-            err.error.title,
-            err.error.message || 'An unexpected error occurred'
-          );
-          this.loading = false;
-        },
-      });
+      this.pS
+        .getAllUser(this.offset, this.filterPublicaciones, this.username)
+        .subscribe({
+          next: (res: any) => {
+            if (res && res.publicaciones) {
+              this.publicaciones.push(...res.publicaciones);
+              this.total = res.total;
+            }
+            this.loading = false;
+          },
+          error: (err) => {
+            console.log(err);
+            this.alert.showAlert(
+              'error',
+              err.error.title,
+              err.error.message || 'An unexpected error occurred'
+            );
+            this.loading = false;
+          },
+        });
       this.offset += 9;
       this.loading = false;
     }
@@ -236,5 +239,17 @@ export class OtherUserComponent implements AfterViewInit {
           swalWithBootstrapButtons.fire('Cancelled', '', 'error');
         }
       });
+  }
+  filter() {
+    console.log(this.filterPublicaciones);
+    this.publicaciones = [];
+    this.offset = 0;
+    console.log(this.publicaciones);
+    this.getPublicaciones();
+    setTimeout(() => {
+      if (window.innerHeight <= document.body.offsetHeight) {
+        this.getPublicaciones();
+      }
+    }, 300);
   }
 }

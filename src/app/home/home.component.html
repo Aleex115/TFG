@@ -12,7 +12,16 @@
   <section class="image two"></section>
 </div>
 @if (publicaciones) {
-
+<div class="input-container">
+  <input
+    type="text"
+    placeholder="Search photos by title or description"
+    [(ngModel)]="filterPublicaciones"
+  />
+  <label (click)="filter()">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </label>
+</div>
 <app-gallery [publicaciones]="publicaciones" [session]="false"></app-gallery>
 <div #scrollAnchor></div>
 }

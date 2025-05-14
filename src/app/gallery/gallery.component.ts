@@ -37,8 +37,24 @@ export class GalleryComponent {
     private alert: AlertService,
     private router: Router
   ) {
-    this.uS.getOne().subscribe((res: any) => {
-      this.user = res.user;
+    this.uS.getOne().subscribe({
+      next: (res: any) => {
+        this.user = res.user;
+      },
+      error: (err) => {
+        this.download.nativeElement.close();
+
+        if (err.status == 401) {
+          this.alert.showMessageExpired();
+          this.router.navigate(['/login']);
+        } else {
+          this.alert.showAlert(
+            'error',
+            err.error.title,
+            err.error.message || 'An unexpected error occurred'
+          );
+        }
+      },
     });
   }
 
@@ -53,6 +69,8 @@ export class GalleryComponent {
           this.likes++;
         },
         error: (err) => {
+          this.download.nativeElement.close();
+
           if (err.status == 401) {
             this.alert.showMessageExpired();
             this.router.navigate(['/login']);
@@ -75,7 +93,9 @@ export class GalleryComponent {
           this.likes--;
         },
         error: (err) => {
-          Swal.close();
+          close();
+          this.download.nativeElement.close();
+
           if (err.status == 401) {
             this.alert.showMessageExpired();
             this.router.navigate(['/login']);
@@ -166,6 +186,8 @@ export class GalleryComponent {
         },
         error: (err) => {
           Swal.close();
+          this.download.nativeElement.close();
+
           if (err.status == 401) {
             this.alert.showMessageExpired();
             this.router.navigate(['/login']);
@@ -190,6 +212,8 @@ export class GalleryComponent {
       },
       error: (err) => {
         Swal.close();
+        this.download.nativeElement.close();
+
         if (err.status == 401) {
           this.alert.showMessageExpired();
           this.router.navigate(['/login']);
@@ -226,6 +250,7 @@ export class GalleryComponent {
   clear() {
     this.comentario = '';
   }
+
   closeOnOutsideClick(event: MouseEvent) {
     let dialogos = [this.download];
     dialogos.forEach((el) => {

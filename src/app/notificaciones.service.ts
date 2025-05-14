@@ -8,12 +8,15 @@ export class NotificacionesService {
   constructor(private http: HttpClient) {}
   url = 'https://imagehub-y2nt.onrender.com/';
 
-  getAll() {
-    return this.http.get(this.url + 'getAllNotifications', {
-      withCredentials: true,
-    });
+  getAll(type: string, read: boolean) {
+    return this.http.get(
+      this.url + `getAllNotifications?type=${type}&read=${read}`,
+      {
+        withCredentials: true,
+      }
+    );
   }
-  updatePwd(id: string) {
+  setRead(id: string) {
     return this.http.put(
       this.url + 'setRead',
       { id },

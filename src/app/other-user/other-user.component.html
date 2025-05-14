@@ -34,6 +34,16 @@
 
 } @if (user) { @if (user.es_amigo == 1 || user.id_estadou==0) { @if
 (publicaciones) {
+<div class="input-container">
+  <input
+    type="text"
+    placeholder="Search photos by title or description"
+    [(ngModel)]="filterPublicaciones"
+  />
+  <label (click)="filter()">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </label>
+</div>
 <app-gallery [publicaciones]="publicaciones" [session]="false"></app-gallery>
 } }@else {
 <div class="private">

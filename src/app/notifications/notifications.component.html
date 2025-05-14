@@ -1,1 +1,50 @@
-<p>notifications works!</p>
+<main>
+  <div class="filters-container">
+    <div class="filters">
+      <label for="search">Username:</label>
+      <input type="text" [(ngModel)]="username" (input)="filterUsername()" />
+
+      <label for="category">Type:</label>
+      <select name="category" name="prueba" (input)="setType($event)">
+        <option value="">All</option>
+        <option value="like">Like</option>
+        <option value="dislike">Dislike</option>
+        <option value="requested">Requested</option>
+        <option value="unrequested">Unrequested</option>
+        <option value="follow">Follow</option>
+        <option value="unfollow">Unfollow</option>
+        <option value="comment">Comment</option>
+      </select>
+
+      <label for="onlyUnread">
+        <input type="checkbox" id="onlyUnread" (input)="setNoRead($event)" />
+        Solo no leídas
+      </label>
+    </div>
+  </div>
+  <section class="notification-container">
+    @if (notificationsFilter) { @for (not of notificationsFilter; track $index)
+    {
+    <div
+      [class]="not.leido ? 'read notification' : 'notification'"
+      (click)="setRead($event, not)"
+    >
+      <div class="notification-author" (click)="link(not, $event)">
+        <img [src]="not.foto_perfil || 'notification.png'" alt="Autor" />
+      </div>
+      <p class="notification-content" (click)="none($event)">
+        <span class="author-name">{{ not.username }}</span>
+        {{ not.message || "no description" }}
+      </p>
+      @if (not.foto) {
+      <img
+        class="publication"
+        [src]="not.foto"
+        [alt]="not.title"
+        (click)="click2($event)"
+      />
+      }
+    </div>
+    } }
+  </section>
+</main>

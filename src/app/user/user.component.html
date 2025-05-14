@@ -35,6 +35,16 @@
 </nav>
 
 } @if (publicaciones) {
+<div class="input-container">
+  <input
+    type="text"
+    placeholder="Search photos by title or description"
+    [(ngModel)]="filterPublicaciones"
+  />
+  <label (click)="filterPublications()">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </label>
+</div>
 <app-gallery [publicaciones]="publicaciones" [session]="true"></app-gallery>
 <div #scrollAnchor></div>
 <div class="delete-container">
@@ -191,13 +201,14 @@
   </div>
 </dialog>
 } @if (amigos) {
+
 <dialog #showFriends (click)="closeOnOutsideClick($event)" class="petitions">
   <div class="input-container">
     <input
       type="text"
       placeholder="Search a user"
       [(ngModel)]="usernameFilter"
-      (input)="filter()"
+      (input)="filterPublications()"
     />
     <label>
       <i class="fa-solid fa-magnifying-glass"></i>

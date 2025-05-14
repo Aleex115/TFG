@@ -1,13 +1,12 @@
 import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
-import { UsuarioService } from '../usuario.service';
 import { PublicacionesService } from '../publicaciones.service';
 import { AlertService } from '../alert.service';
-import { ActivatedRoute, ParamMap } from '@angular/router';
 import { GalleryComponent } from '../gallery/gallery.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
-  imports: [GalleryComponent],
+  imports: [GalleryComponent, FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
@@ -19,6 +18,7 @@ export class HomeComponent {
   publicaciones: any[] = [];
 
   total = 0;
+  filterPublicaciones = '';
 
   offset = 0;
 
@@ -39,8 +39,9 @@ export class HomeComponent {
     if (this.offset <= this.total && !this.loading) {
       this.loading = true;
 
-      this.pS.getAllPublic(this.offset).subscribe({
+      this.pS.getAllPublic(this.offset, this.filterPublicaciones).subscribe({
         next: (res: any) => {
+          console.log(res);
           if (res && res.publicaciones) {
             this.publicaciones.push(...res.publicaciones);
             this.total = res.total;
@@ -60,6 +61,18 @@ export class HomeComponent {
       this.offset += 9;
       this.loading = false;
     }
+  }
+  filter() {
+    console.log(this.filterPublicaciones);
+    this.publicaciones = [];
+    this.offset = 0;
+    console.log(this.publicaciones);
+    this.getPublicaciones();
+    setTimeout(() => {
+      if (window.innerHeight <= document.body.offsetHeight) {
+        this.getPublicaciones();
+      }
+    }, 300);
   }
 
   // Es como el DOMContentLoad

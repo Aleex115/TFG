@@ -11,18 +11,22 @@ export class PublicacionesService {
   upload(fd: FormData) {
     return this.http.post(this.url + 'upload', fd, { withCredentials: true });
   }
-  getAllUser(offset: number, username: string = '') {
+  getAllUser(offset: number, filter: string, username: string = '') {
     return this.http.get(
-      this.url + `getPublicacionesUser?username=${username}&offset=${offset}`,
+      this.url +
+        `getPublicacionesUser?username=${username}&offset=${offset}&filter=${filter}`,
       {
         withCredentials: true,
       }
     );
   }
-  getAllPublic(offset: number) {
-    return this.http.get(this.url + `getPublicacionesPublic?offset=${offset}`, {
-      withCredentials: true,
-    });
+  getAllPublic(offset: number, filter: string) {
+    return this.http.get(
+      this.url + `getPublicacionesPublic?offset=${offset}&filter=${filter}`,
+      {
+        withCredentials: true,
+      }
+    );
   }
   deletePubli(id: string, public_id: string, dni: string = '') {
     let params = { dni, id, public_id };

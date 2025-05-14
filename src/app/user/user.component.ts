@@ -38,6 +38,8 @@ export class UserComponent implements AfterViewInit {
   amigos: any;
   amigosFiltered: any;
 
+  filterPublicaciones = '';
+
   previewUrl: any;
   total = 0;
   offset = 0;
@@ -127,7 +129,7 @@ export class UserComponent implements AfterViewInit {
   getPublicaciones() {
     if (this.offset <= this.total && !this.loading) {
       this.loading = true;
-      this.pS.getAllUser(this.offset).subscribe({
+      this.pS.getAllUser(this.offset, this.filterPublicaciones).subscribe({
         next: (res: any) => {
           if (res && res.publicaciones) {
             this.publicaciones.push(...res.publicaciones);
@@ -539,5 +541,17 @@ export class UserComponent implements AfterViewInit {
           swalWithBootstrapButtons.fire('Cancelled', '', 'error');
         }
       });
+  }
+  filterPublications() {
+    console.log(this.filterPublicaciones);
+    this.publicaciones = [];
+    this.offset = 0;
+    console.log(this.publicaciones);
+    this.getPublicaciones();
+    setTimeout(() => {
+      if (window.innerHeight <= document.body.offsetHeight) {
+        this.getPublicaciones();
+      }
+    }, 300);
   }
 }
