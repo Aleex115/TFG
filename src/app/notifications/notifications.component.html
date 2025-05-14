@@ -37,12 +37,7 @@
         {{ not.message || "no description" }}
       </p>
       @if (not.foto) {
-      <img
-        class="publication"
-        [src]="not.foto"
-        [alt]="not.title"
-        (click)="click2($event)"
-      />
+      <img class="publication" [src]="not.foto" [alt]="not.title" />
       }
     </div>
     } }

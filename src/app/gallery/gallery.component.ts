@@ -58,10 +58,10 @@ export class GalleryComponent {
     });
   }
 
-  like(id: string, persona_dni: string, e: Event) {
+  like(id: string, dni_persona: string, e: Event) {
     let checkbox = e.target as HTMLInputElement;
     if (checkbox.checked) {
-      this.lS.giveLike(id, persona_dni).subscribe({
+      this.lS.giveLike(id, dni_persona).subscribe({
         next: (res: any) => {
           let p = this.publicaciones.find((el) => el.id == id);
           p.hasLiked = 1;
@@ -84,7 +84,7 @@ export class GalleryComponent {
         },
       });
     } else {
-      this.lS.deleteLike(id, persona_dni).subscribe({
+      this.lS.deleteLike(id, dni_persona).subscribe({
         next: (res: any) => {
           let p = this.publicaciones.find((el) => el.id == id);
 
@@ -174,13 +174,13 @@ export class GalleryComponent {
       });
   }
 
-  comment(id: string, persona_dni: string) {
+  comment(id: string, dni_persona: string) {
     if (!this.comentario) {
       this.alert.showAlert('error', 'Error', "You can't send an empty comment");
     } else {
       this.download.nativeElement.close();
-      console.log(persona_dni);
-      this.cS.writeComment(id, this.comentario, persona_dni).subscribe({
+      console.log(dni_persona);
+      this.cS.writeComment(id, this.comentario, dni_persona).subscribe({
         next: (res: any) => {
           this.alert.showAlert('success', 'OK', 'Comment posted successfully');
         },
@@ -293,7 +293,7 @@ export class GalleryComponent {
           this.publication.foto,
           this.formato,
           this.calidad,
-          this.publication.persona_dni,
+          this.publication.dni_persona,
           this.publication.id
         )
         .subscribe({
@@ -344,7 +344,7 @@ export class GalleryComponent {
     console.log(this.user);
     this.download.nativeElement.close();
 
-    if (this.user.dni == u.persona_dni || this.user.username == u.username) {
+    if (this.user.dni == u.dni_persona || this.user.username == u.username) {
       this.router.navigate(['/user']);
       setTimeout(() => {
         window.location.reload();

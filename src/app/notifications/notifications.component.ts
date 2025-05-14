@@ -44,10 +44,7 @@ export class NotificationsComponent {
       },
     });
   }
-  click2(e: Event) {
-    e.stopPropagation();
-    console.log('2');
-  }
+
   none(e: Event) {
     e.stopPropagation();
   }
@@ -107,10 +104,11 @@ export class NotificationsComponent {
     });
   }
   link(u: any, e: Event) {
+    e.stopPropagation();
     console.log(u);
     console.log(this.user);
 
-    if (this.user.dni == u.id_ejecutor) {
+    if (this.user.dni == u.dni_ejecutor) {
       this.router.navigate(['/user']);
       setTimeout(() => {
         window.location.reload();

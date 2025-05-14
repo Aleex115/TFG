@@ -96,11 +96,15 @@ main {
 }
 
 .notification img {
-  width: 30px;
-  height: 30px;
+  width: 60px;
+  height: 60px;
   object-fit: cover;
   border-radius: 50%;
   margin-right: 5px;
+}
+
+.notification img:hover {
+  cursor: pointer;
 }
 
 .notification-content {
@@ -122,6 +126,10 @@ main {
   border-radius: 8px;
 }
 
+.notification .publication:hover {
+  cursor: default;
+}
+
 .notification.read {
   background-color: #f5f5f5;
   border-color: #B9B8B5;
@@ -130,4 +138,5 @@ main {
 .notification.read:hover {
   transform: none;
   box-shadow: none;
+  cursor: default;
 }
