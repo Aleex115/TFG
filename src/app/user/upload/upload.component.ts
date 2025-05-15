@@ -61,8 +61,8 @@ export class UploadComponent {
     const fd = new FormData();
 
     // Agrega los campos del formulario al FormData
-    fd.append('title', this.form.get('title')?.value || '');
-    fd.append('descp', this.form.get('descp')?.value || '');
+    fd.append('title', this.form.value.title?.trim() || '');
+    fd.append('descp', this.form.value.descp?.trim() || '');
 
     // Agrega el archivo al FormData
     const fileInput = form.querySelector(

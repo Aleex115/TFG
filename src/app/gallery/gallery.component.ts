@@ -169,7 +169,7 @@ export class GalleryComponent {
     } else {
       this.download.nativeElement.close();
       console.log(dni_persona);
-      this.cS.writeComment(id, this.comentario, dni_persona).subscribe({
+      this.cS.writeComment(id, this.comentario.trim(), dni_persona).subscribe({
         next: (res: any) => {
           this.alert.showAlert('success', 'OK', 'Comment posted successfully');
         },

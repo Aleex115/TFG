@@ -129,23 +129,25 @@ export class UserComponent implements AfterViewInit {
   getPublicaciones() {
     if (this.offset <= this.total && !this.loading) {
       this.loading = true;
-      this.pS.getAllUser(this.offset, this.filterPublicaciones).subscribe({
-        next: (res: any) => {
-          if (res && res.publicaciones) {
-            this.publicaciones.push(...res.publicaciones);
-            this.total = res.total;
-          }
-          this.loading = false;
-        },
-        error: (err) => {
-          this.alert.showAlert(
-            'error',
-            err.error.title,
-            err.error.message || 'An unexpected error occurred'
-          );
-          this.loading = false;
-        },
-      });
+      this.pS
+        .getAllUser(this.offset, this.filterPublicaciones.trim())
+        .subscribe({
+          next: (res: any) => {
+            if (res && res.publicaciones) {
+              this.publicaciones.push(...res.publicaciones);
+              this.total = res.total;
+            }
+            this.loading = false;
+          },
+          error: (err) => {
+            this.alert.showAlert(
+              'error',
+              err.error.title,
+              err.error.message || 'An unexpected error occurred'
+            );
+            this.loading = false;
+          },
+        });
       this.offset += 9;
     }
   }

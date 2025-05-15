@@ -36,10 +36,10 @@ export class SignInComponent {
   enviar() {
     this.uS
       .signin(
-        this.form.value.dni!,
-        this.form.value.email!,
-        this.form.value.username!,
-        this.form.value.pwd!
+        this.form.value.dni!.trim(),
+        this.form.value.email!.trim(),
+        this.form.value.username!.trim(),
+        this.form.value.pwd!.trim()
       )
       .subscribe({
         next: (res) => {

@@ -84,7 +84,7 @@ export class OtherUserComponent implements AfterViewInit {
       this.loading = true;
 
       this.pS
-        .getAllUser(this.offset, this.filterPublicaciones, this.username)
+        .getAllUser(this.offset, this.filterPublicaciones.trim(), this.username)
         .subscribe({
           next: (res: any) => {
             if (res && res.publicaciones) {

@@ -39,34 +39,34 @@ export class HomeComponent {
     if (this.offset <= this.total && !this.loading) {
       this.loading = true;
 
-      this.pS.getAllPublic(this.offset, this.filterPublicaciones).subscribe({
-        next: (res: any) => {
-          console.log(res);
-          if (res && res.publicaciones) {
-            this.publicaciones.push(...res.publicaciones);
-            this.total = res.total;
-          }
-          this.loading = false;
-        },
-        error: (err) => {
-          console.log(err);
-          this.alert.showAlert(
-            'error',
-            err.error.title,
-            err.error.message || 'An unexpected error occurred'
-          );
-          this.loading = false;
-        },
-      });
+      this.pS
+        .getAllPublic(this.offset, this.filterPublicaciones.trim())
+        .subscribe({
+          next: (res: any) => {
+            console.log(res);
+            if (res && res.publicaciones) {
+              this.publicaciones.push(...res.publicaciones);
+              this.total = res.total;
+            }
+            this.loading = false;
+          },
+          error: (err) => {
+            console.log(err);
+            this.alert.showAlert(
+              'error',
+              err.error.title,
+              err.error.message || 'An unexpected error occurred'
+            );
+            this.loading = false;
+          },
+        });
       this.offset += 9;
       this.loading = false;
     }
   }
   filter() {
-    console.log(this.filterPublicaciones);
     this.publicaciones = [];
     this.offset = 0;
-    console.log(this.publicaciones);
     this.getPublicaciones();
     setTimeout(() => {
       if (window.innerHeight <= document.body.offsetHeight) {

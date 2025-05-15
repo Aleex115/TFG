@@ -35,24 +35,26 @@ export class LogInComponent {
     pwd: new FormControl('', [Validators.required, Validators.minLength(3)]),
   });
   enviar() {
-    this.uS.login(this.form.value.username!, this.form.value.pwd!).subscribe({
-      next: (res: any) => {
-        this.alert.showAlert(
-          'success',
-          'Login Successful',
-          'Welcome to the system'
-        );
+    this.uS
+      .login(this.form.value.username?.trim()!, this.form.value.pwd?.trim()!)
+      .subscribe({
+        next: (res: any) => {
+          this.alert.showAlert(
+            'success',
+            'Login Successful',
+            'Welcome to the system'
+          );
 
-        this.router.navigateByUrl(this.url);
-      },
-      error: (err) => {
-        console.log(err);
-        this.alert.showAlert(
-          'error',
-          err.error.title,
-          err.error.message || 'An unexpected error occurred'
-        );
-      },
-    });
+          this.router.navigateByUrl(this.url);
+        },
+        error: (err) => {
+          console.log(err);
+          this.alert.showAlert(
+            'error',
+            err.error.title,
+            err.error.message || 'An unexpected error occurred'
+          );
+        },
+      });
   }
 }
