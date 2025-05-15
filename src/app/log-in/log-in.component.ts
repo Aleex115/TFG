@@ -36,7 +36,11 @@ export class LogInComponent {
       Validators.required,
       CustomValidator.username,
     ]),
-    pwd: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    pwd: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+      CustomValidator.pwd,
+    ]),
   });
   enviar() {
     this.uS

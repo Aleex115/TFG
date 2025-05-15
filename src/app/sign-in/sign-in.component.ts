@@ -30,10 +30,15 @@ export class SignInComponent {
       Validators.required,
       CustomValidator.username,
     ]),
-    pwd: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    pwd: new FormControl('', [
+      Validators.required,
+      Validators.minLength(4),
+      CustomValidator.pwd,
+    ]),
     ConfirmPwd: new FormControl('', [
       Validators.required,
       Validators.minLength(4),
+      CustomValidator.pwd,
     ]),
   });
   enviar() {

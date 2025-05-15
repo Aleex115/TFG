@@ -48,8 +48,16 @@ export class UserComponent implements AfterViewInit {
   editProfileForm: any;
 
   editPwdForm = new FormGroup({
-    newPwd: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    oldPwd: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    newPwd: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+      CustomValidator.pwd,
+    ]),
+    oldPwd: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+      CustomValidator.pwd,
+    ]),
   });
 
   constructor(
@@ -71,7 +79,7 @@ export class UserComponent implements AfterViewInit {
       this.editProfileForm = new FormGroup({
         username: new FormControl(this.user.username, [
           Validators.required,
-          Validators.minLength(3),
+          CustomValidator.username,
         ]),
         descp: new FormControl(this.user.descp, [
           Validators.required,

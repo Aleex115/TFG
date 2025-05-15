@@ -16,4 +16,9 @@ export class CustomValidator {
     if (regex.test(control.value)) return null;
     else return { username: true };
   }
+  static pwd(control: AbstractControl): ValidationErrors | null {
+    let regex = /^[^\\'"&=;{}\[\]:,\n\r\t]+$/;
+    if (regex.test(control.value)) return null;
+    else return { pwd: true };
+  }
 }
