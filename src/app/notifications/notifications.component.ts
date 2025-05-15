@@ -49,7 +49,9 @@ export class NotificationsComponent {
     e.stopPropagation();
   }
   setRead(e: Event, not: any) {
+    e.stopPropagation();
     let card = e.target as HTMLElement;
+    card = card.closest('.notification') || card;
     this.nS.setRead(not.id).subscribe({
       next: (res: any) => {
         card.classList.add('read');
