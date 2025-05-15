@@ -52,23 +52,26 @@ export class NotificationsComponent {
     e.stopPropagation();
     let card = e.target as HTMLElement;
     card = card.closest('.notification') || card;
-    this.nS.setRead(not.id).subscribe({
-      next: (res: any) => {
-        card.classList.add('read');
-      },
-      error: (err) => {
-        if (err.status == 401) {
-          this.alert.showMessageExpired();
-          this.router.navigate(['/login']);
-        } else {
-          this.alert.showAlert(
-            'error',
-            err.error.title,
-            err.error.message || 'An unexpected error occurred'
-          );
-        }
-      },
-    });
+    if (!not.leido) {
+      console.log('prueba');
+      this.nS.setRead(not.id).subscribe({
+        next: (res: any) => {
+          card.classList.add('read');
+        },
+        error: (err) => {
+          if (err.status == 401) {
+            this.alert.showMessageExpired();
+            this.router.navigate(['/login']);
+          } else {
+            this.alert.showAlert(
+              'error',
+              err.error.title,
+              err.error.message || 'An unexpected error occurred'
+            );
+          }
+        },
+      });
+    }
   }
 
   filterUsername() {
