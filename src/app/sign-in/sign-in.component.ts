@@ -26,7 +26,10 @@ export class SignInComponent {
   form = new FormGroup({
     dni: new FormControl('', [Validators.required, CustomValidator.dni]),
     email: new FormControl('', [Validators.required, CustomValidator.email]),
-    username: new FormControl('', [Validators.required]),
+    username: new FormControl('', [
+      Validators.required,
+      CustomValidator.username,
+    ]),
     pwd: new FormControl('', [Validators.required, Validators.minLength(4)]),
     ConfirmPwd: new FormControl('', [
       Validators.required,

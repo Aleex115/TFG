@@ -8,6 +8,7 @@ import {
 import { UsuarioService } from '../usuario.service';
 import { ActivatedRoute, ParamMap, Router, RouterLink } from '@angular/router';
 import { AlertService } from '../alert.service';
+import { CustomValidator } from '../CustomValidator';
 
 @Component({
   selector: 'app-log-in',
@@ -31,7 +32,10 @@ export class LogInComponent {
   }
 
   form = new FormGroup({
-    username: new FormControl('', [Validators.required]),
+    username: new FormControl('', [
+      Validators.required,
+      CustomValidator.username,
+    ]),
     pwd: new FormControl('', [Validators.required, Validators.minLength(3)]),
   });
   enviar() {

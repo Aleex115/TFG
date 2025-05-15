@@ -11,4 +11,9 @@ export class CustomValidator {
     if (regex.test(control.value)) return null;
     else return { dni: true };
   }
+  static username(control: AbstractControl): ValidationErrors | null {
+    let regex = /^[a-zA-Z0-9_]+$/;
+    if (regex.test(control.value)) return null;
+    else return { username: true };
+  }
 }

@@ -27,7 +27,7 @@
     </fieldset>
 
     <fieldset
-      [class]='(form.get("username")?.errors?.["username"] && form.value.email !=="") ? "red":"none"'
+      [class]='(form.get("username")?.errors?.["username"] && form.value.username !=="") ? "red":"none"'
     >
       <legend>Username</legend>
       <input type="test" formControlName="username" name="username" />
