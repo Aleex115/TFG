@@ -17,7 +17,9 @@
       <input type="text" formControlName="username" autocomplete="username" />
     </fieldset>
     <fieldset
-      [class]='(form.get("pwd")?.errors?.["minlength"] && form.value.pwd !=="") ? "red":"none"'
+      [class]="
+        form.get('pwd')?.errors && form.value.pwd !== '' ? 'red' : 'none'
+      "
     >
       <legend>Password</legend>
       <input

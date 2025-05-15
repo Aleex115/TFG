@@ -84,6 +84,7 @@ export class UserComponent implements AfterViewInit {
         descp: new FormControl(this.user.descp, [
           Validators.required,
           Validators.minLength(3),
+          Validators.maxLength(255),
         ]),
         email: new FormControl(this.user.email, [
           Validators.required,

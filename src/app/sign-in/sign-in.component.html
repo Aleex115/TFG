@@ -34,7 +34,9 @@
     </fieldset>
 
     <fieldset
-      [class]='(form.get("pwd")?.errors?.["minlength"] && form.value.pwd !=="") ? "red":"none"'
+      [class]="
+        form.get('pwd')?.errors && form.value.pwd !== '' ? 'red' : 'none'
+      "
     >
       <legend>Password</legend>
       <input
@@ -46,7 +48,11 @@
     </fieldset>
 
     <fieldset
-      [class]='(form.get("ConfirmPwd")?.errors?.["minlength"] && form.value.ConfirmPwd !=="") ? "red":"none"'
+      [class]="
+        form.get('ConfirmPwd')?.errors && form.value.ConfirmPwd !== ''
+          ? 'red'
+          : 'none'
+      "
     >
       <legend>Confirm password</legend>
       <input
