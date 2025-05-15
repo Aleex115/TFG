@@ -50,6 +50,7 @@ main {
   .filters-container {
     width: 100%;
     border-bottom: 1px solid #B9B8B5;
+    max-width: none;
   }
 
   .filters {
@@ -59,13 +60,25 @@ main {
     min-height: 0px;
     border: none;
   }
+
+  .notification-container {
+
+    width: 100% !important;
+
+  }
+
+  .notification-container .notification img {
+    width: 40px;
+    height: 40px;
+
+  }
+
 }
 
 
 
 
 .notification-container {
-  width: 70%;
   padding: 20px;
   margin: 0 auto;
   width: 80%;
