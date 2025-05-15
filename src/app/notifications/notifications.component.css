@@ -6,6 +6,7 @@ main {
 .filters-container {
   width: 30%;
   max-width: 300px;
+  height: auto;
 }
 
 .filters {
@@ -15,7 +16,7 @@ main {
   gap: 20px;
   border-right: 1px solid #B9B8B5;
   min-height: calc(100vh - 120px);
-  height: auto;
+  height: 100%;
   padding: 20px;
   color: #333;
 }
@@ -64,6 +65,7 @@ main {
   .notification-container {
 
     width: 100% !important;
+    margin-bottom: 60px !important;
 
   }
 
