@@ -43,17 +43,6 @@ export class GalleryComponent {
       },
       error: (err) => {
         this.download.nativeElement.close();
-
-        if (err.status == 401) {
-          this.alert.showMessageExpired();
-          this.router.navigate(['/login']);
-        } else {
-          this.alert.showAlert(
-            'error',
-            err.error.title,
-            err.error.message || 'An unexpected error occurred'
-          );
-        }
       },
     });
   }
