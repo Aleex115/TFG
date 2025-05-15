@@ -32,7 +32,7 @@
       <div class="notification-author" (click)="link(not, $event)">
         <img [src]="not.foto_perfil || 'notification.png'" alt="Autor" />
       </div>
-      <p class="notification-content" (click)="none($event)">
+      <p class="notification-content" (click)="setRead($event, not)">
         <span class="author-name">{{ not.username }}</span>
         {{ not.message || "no description" }}
       </p>
