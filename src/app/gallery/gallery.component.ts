@@ -165,8 +165,10 @@ export class GalleryComponent {
 
   comment(id: string, dni_persona: string) {
     if (!this.comentario) {
+      this.download.nativeElement.close();
       this.alert.showAlert('error', 'Error', "You can't send an empty comment");
     } else if (this.comentario.length >= 200) {
+      this.download.nativeElement.close();
       this.alert.showAlert(
         'error',
         'Error',
