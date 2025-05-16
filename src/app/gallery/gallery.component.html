@@ -9,7 +9,7 @@
       </button>
       }
       <button class="down" (click)="savePublication(publi)">
-        <i class="fa-solid fa-down-long fa-xs"></i>Download
+        <i class="fa-solid fa-down-long fa-xs"></i>View
       </button>
       <div>
         <div class="heart">
@@ -162,7 +162,7 @@
       @for (comment of comments; track $index) {
       <div class="comment" (click)="link(comment)">
         <div class="comment-author">
-          <img [src]="comment.foto_perfil" alt="Autor" />
+          <img [src]="comment.foto_perfil || 'user.png'" alt="Autor" />
         </div>
         <p class="comment-content">
           <span class="author-name">{{ comment.username }}</span>

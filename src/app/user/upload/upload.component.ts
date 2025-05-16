@@ -23,8 +23,11 @@ export class UploadComponent {
     private alert: AlertService
   ) {}
   form = new FormGroup({
-    title: new FormControl('', Validators.required),
-    descp: new FormControl('', Validators.required),
+    title: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+    descp: new FormControl('', [
+      Validators.required,
+      Validators.maxLength(200),
+    ]),
   });
   previewUrl: string | ArrayBuffer | null = null;
   onFileSelected(event: Event): void {
