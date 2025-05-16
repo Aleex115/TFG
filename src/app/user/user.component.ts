@@ -335,6 +335,7 @@ export class UserComponent implements AfterViewInit {
     event.preventDefault();
     const newPwd = this.editPwdForm.value.newPwd;
     const oldPwd = this.editPwdForm.value.oldPwd;
+    this.close();
 
     this.uS.updatePwd(newPwd!, oldPwd!).subscribe({
       next: () => {
