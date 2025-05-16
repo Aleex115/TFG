@@ -7,11 +7,19 @@
       (ngSubmit)="submit($event)"
     >
       <h2>Upload image</h2>
-      <fieldset>
+      <fieldset
+        [class]="
+          form.get('title')?.errors && form.value.title !== '' ? 'red' : 'none'
+        "
+      >
         <legend>Title</legend>
         <input type="text" formControlName="title" name="title" />
       </fieldset>
-      <fieldset>
+      <fieldset
+        [class]="
+          form.get('descp')?.errors && form.value.descp !== '' ? 'red' : 'none'
+        "
+      >
         <legend>Description</legend>
         <input type="text" formControlName="descp" name="descp" />
       </fieldset>
