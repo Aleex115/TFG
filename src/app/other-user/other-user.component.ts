@@ -134,7 +134,9 @@ export class OtherUserComponent implements AfterViewInit {
       console.log('Perfil publico');
       this.fS.follow(u.dni).subscribe({
         next: (res: any) => {
-          console.log(res);
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
           this.alert.showAlert('success', 'OK', 'Followed successfully');
         },
         error: (err) => {
