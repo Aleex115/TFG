@@ -49,7 +49,7 @@
 
 <dialog class="modal" #download (click)="closeOnOutsideClick($event)">
   @if (publication) {
-  <img [src]="publication.foto" [alt]="publication.title" />
+  <img [src]="publication.foto" [alt]="publication.title" loading="lazy" />
   <div>
     <div class="flex">
       <h3>{{ publication.title }}</h3>
