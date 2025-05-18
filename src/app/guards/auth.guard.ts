@@ -22,7 +22,6 @@ export class AuthGuard implements CanActivate {
     return new Promise((resolve) => {
       this.uS.session().subscribe({
         next: (res) => {
-          // console.log('Sesión activa:', res);
           resolve(true);
         },
         error: (err) => {

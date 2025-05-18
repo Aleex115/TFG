@@ -47,12 +47,7 @@
 </div>
 <app-gallery [publicaciones]="publicaciones" [session]="true"></app-gallery>
 <div #scrollAnchor></div>
-<div class="delete-container">
-  <div class="delete" (click)="deleteUser()">
-    <i class="fa-solid fa-user-slash"></i>
-    <p>Delete Profile</p>
-  </div>
-</div>
+
 } @if (user) {
 <dialog #editProfileDialog (click)="closeOnOutsideClick($event)">
   <form
